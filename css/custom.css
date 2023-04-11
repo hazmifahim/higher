@@ -1,0 +1,53 @@
+/*------------------------------------------------------------------
+    File Name: custom.css
+-------------------------------------------------------------------*/
+
+   .fade-in-cust {
+    animation: fade-in-cust 0.3s ease-in forwards;
+    }
+
+    .fade-out-cust {
+    animation: fade-out-cust 0.3s ease-out forwards;
+    }
+
+
+    @keyframes fade-in-cust {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+    }
+
+    @keyframes fade-out-cust {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+    }
+
+    .mb-space  {
+    padding:10px;
+    }
+
+    .mb-space .col-sm-6 {
+    margin-bottom:20px;
+    }
+
+    .panel {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px
+    }
+
+    .panel-heading {
+    background-color: #f1f1f1;
+    border-bottom: 1px solid ##ccc;
+    border-radius: 5px 5px 0 0;
+    padding: 10px;
+    }
+
+    .panel-heading h2 {
+    margin: 0;
+    }
+
+    .panel-body {
+    padding: 10px;
+    }
+/** ADD YOUR AWESOME CODES HERE **/
