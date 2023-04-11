@@ -198,6 +198,29 @@
             });
          }, 500);
       }
+
+      function loadTabContent() {
+         // Get all the tabs
+         const tabs = document.querySelectorAll('[data-url]');
+
+         // Loop through each tab
+         tabs.forEach(tab => {
+            // Get the URL from the data-url attribute
+            const url = tab.getAttribute('data-url');
+
+            // Load the content from the URL using fetch()
+            fetch(url)
+               .then(response => response.text())
+               .then(data => {
+               // Set the content of the tab to the fetched data
+               const tabContent = document.querySelector(tab.getAttribute('href'));
+               tabContent.innerHTML = data;
+               })
+               .catch(error => {
+               console.error(`Error loading tab content: ${error}`);
+               });
+         });
+      }
   
       loadContent("page-dashboard.cfm");
 
@@ -213,12 +236,8 @@
          loadContent("pilot_list.cfm");
       });
 
-      $("##today_list").click(function(){
-         loadContent("flight_today.cfm");
-      });
-
-      $("##stay_list").click(function(){
-         loadContent("stay.cfm");
+      $("##employee_area").click(function(){
+         loadContent("employee_main_tab.cfm");
       });
 
    </script>
