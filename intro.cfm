@@ -63,6 +63,13 @@
                   <ul class="list-unstyled components">
                      <li class="active"><a id="page_dashboard" href="##"><i class="fa fa-dashboard yellow_color"></i> <span>Dashboard</span></a></li>
                      <li>
+                        <a href="##management" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-folder-open green_color"></i> <span>Management</span></a>
+                        <ul class="collapse list-unstyled" id="management">
+                           <li><a id="attendance_mngmnt" href="##">> <span>Attendance</span></a></li>
+                           <li><a id="employee_area" href="##">> <span>Employee</span></a></li>
+                        </ul>
+                     </li>
+                     <li>
                         <a href="##bookings" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-list blue2_color"></i> <span>Bookings</span></a>
                         <ul class="collapse list-unstyled" id="bookings">
                            <li><a id="booking_register" href="##">> <span>Register New Booking</span></a></li>
