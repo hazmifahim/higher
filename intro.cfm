@@ -237,7 +237,7 @@
       });
 
       $("##employee_area").click(function(){
-         loadContent("employee_main_tab.cfm");
+         loadContent("module/management/employee/employee_list.cfm");
       });
 
       $("##attendance_mngmnt").click(function(){
