@@ -240,6 +240,10 @@
          loadContent("employee_main_tab.cfm");
       });
 
+      $("##attendance_mngmnt").click(function(){
+         loadContent("attendance_list.cfm");
+      });
+
    </script>
 </html>
 </cfif>

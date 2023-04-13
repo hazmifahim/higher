@@ -212,6 +212,26 @@
 		</cfcatch>
 	</cftry>
 
+	<cftry>
+		<cfquery datasource="higher">
+			SELECT `id` FROM `attendance`
+		</cfquery>
+		<cfcatch type="database">
+			<br>Auto generated
+			<br>CREATE TABLE `attendance`
+			<cfquery datasource="higher">
+				CREATE TABLE `attendance` (
+				`id` int NOT NULL AUTO_INCREMENT,
+				`user_id` int DEFAULT NULL,
+				`created_date` datetime DEFAULT NULL,
+				`clock_in_datetime` datetime DEFAULT NULL,
+				`clock_out_datetime` datetime DEFAULT NULL,
+				PRIMARY KEY (`id`)
+				) ENGINE=InnoDB
+			</cfquery>     
+		</cfcatch>
+	</cftry>
+	
 	<br><br>End of checking
 
 </cfoutput>
