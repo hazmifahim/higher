@@ -231,6 +231,58 @@
 			</cfquery>     
 		</cfcatch>
 	</cftry>
+
+	<cftry>
+		<cfquery datasource="higher">
+			SELECT `id` FROM `advance_salary`
+		</cfquery>
+		<cfcatch type="database">
+			<br>Auto generated
+			<br>CREATE TABLE `advance_salary`
+			<cfquery datasource="higher">
+				CREATE TABLE `advance_salary` (
+					`id` int NOT NULL AUTO_INCREMENT,
+					`advance_amount` double(11,2) DEFAULT NULL,
+					`month` int DEFAULT NULL,
+					`year` int DEFAULT NULL,
+					`created_date` datetime DEFAULT NULL,
+					`payment_date` datetime DEFAULT NULL,
+					`payment_ref` varchar(100) DEFAULT NULL,
+					`user_id` int DEFAULT NULL,
+					PRIMARY KEY (`id`)
+				) ENGINE=InnoDB 
+			</cfquery>     
+		</cfcatch>
+	</cftry>
+
+	<cftry>
+		<cfquery datasource="higher">
+			SELECT `id` FROM `payslips`
+		</cfquery>
+		<cfcatch type="database">
+			<br>Auto generated
+			<br>CREATE TABLE `payslips`
+			<cfquery datasource="higher">
+				CREATE TABLE `payslips` (
+					`id` int NOT NULL AUTO_INCREMENT,
+					`user_id` int DEFAULT NULL,
+					`month` int DEFAULT NULL,
+					`year` int DEFAULT NULL,
+					`gross_amount` double(11,2) DEFAULT NULL,
+					`net_amount` double(11,2) DEFAULT NULL,
+					`created_date` datetime DEFAULT NULL,
+					`payment_status` varchar(1) DEFAULT NULL COMMENT 'Y = Done payment',
+					`payment_ref` varchar(150) DEFAULT NULL,
+					`payment_datetime` datetime DEFAULT NULL,
+					`epf_amount` double(11,2) DEFAULT NULL,
+					`socso_amount` double(11,2) DEFAULT NULL,
+					`eis_amount` double(11,2) DEFAULT NULL,
+					`pcb_amount` double(11,2) DEFAULT NULL,
+					PRIMARY KEY (`id`)
+					) ENGINE=InnoDB
+			</cfquery>     
+		</cfcatch>
+	</cftry>
 	
 	<br><br>End of checking
 
