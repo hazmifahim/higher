@@ -62,7 +62,6 @@
 		t2.`clock_out_datetime`
 	FROM `users` t1
 	LEFT JOIN `attendance` t2 ON t2.`user_id` = t1.`id`
-
 	#PreserveSingleQuotes(queryWhere)# 
 </cfquery>
 
@@ -70,7 +69,6 @@
 	SELECT COUNT(t1.id) AS total 
 	FROM `users` t1
 	LEFT JOIN `attendance` t2 ON t2.`user_id` = t1.`id`
-
 	#PreserveSingleQuotes(queryWhere)#
 </cfquery>
 <cfsavecontent variable="datatablesjson"><cfloop from="1" to="#queryResult.RecordCount#" index="counter"><cfoutput>[<cfloop from="1"  to="#noOfTableFields#" index="innerCounter"><cfif tableFields[innerCounter] EQ "start_date">"#JSStringFormat(dateformat(queryResult[tableFields[innerCounter]][counter],'yyyy/mm/dd'))#"<cfelse>"#replacenocase(JSStringFormat(queryResult[rereplace(tableFields[innerCounter],'"','','all')][counter]),"\'","'","all")#"</cfif><cfif innerCounter LT noOfTableFields>,</cfif></cfloop>]<cfif counter LT queryResult.RecordCount>,</cfif></cfoutput></cfloop></cfsavecontent>

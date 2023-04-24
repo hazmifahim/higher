@@ -86,6 +86,14 @@
 				}
 			},
 			{
+				"aTargets": [3,4],
+				"sClass": "text-center",
+				render: function (data, type, row) {
+					const newDate = new Date(data);
+					return newDate.toLocaleTimeString();
+				}
+			},
+			{
 				"aTargets": [5],
 				"sClass": "text-center",
 				render: function (data, type, full) {
@@ -121,6 +129,13 @@
 						label: 'Close',
 						action: function(dialogItself){
 							dialogItself.close();
+						}
+					},
+					{
+						label: 'Submit',
+						cssClass: 'btn-primary',
+						data: {
+							id: 'btn-confirm'
 						}
 					}]
 				});

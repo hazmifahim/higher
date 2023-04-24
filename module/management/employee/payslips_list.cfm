@@ -30,8 +30,8 @@
 
 </style>
 
-<cfquery name="get_attendance" datasource="higher">
-	SELECT * FROM `attendance`
+<cfquery name="get_payslips" datasource="higher">
+	SELECT * FROM `payslips`
 	WHERE `user_id` = #url.employee_id#
 	ORDER BY `created_date` DESC
 	
@@ -46,30 +46,21 @@
 					<thead>
 						<tr>
 							<th class="text-center" style="width:5%">No.</th>
-							<th class="text-center">Date</th>
-							<th class="text-center">Clock In</th>
-							<th class="text-center">Clock Out</th>
-							<th class="text-center">Status</th>
+							<th class="text-center">Month</th>
+							<th class="text-center">Total Payment (RM)</th>
+							<th class="text-center">Payment Status</th>
+							<th class="text-center">Payment Date</th>
 							<th class="text-center"></th>
 						</tr>
 						
-						<cfloop query="get_attendance">
+						<cfloop query="get_payslips">
 							<tr>
 								<td class="text-center">#currentrow#</td>
-								<td class="text-center">#dateFormat(created_date,'dd-mm-yyyy')#</td>
-								<td class="text-center">#TimeFormat(clock_in_datetime,'hh:nn:ss tt')#</td>
-								<td class="text-center">#TimeFormat(clock_out_datetime,'hh:nn:ss tt')#</td>
+								<td class="text-center">#month# / #year#</td>
+								<td class="text-center">#numberformat(gross_amount,'__,__.00')#</td>
+								<td class="text-center">PAID</td>
 								<td class="text-center">
-									<cfif TimeFormat(clock_in_datetime,'hh:nn:ss') GT '08:00:00'>
-										<b>Clock-In : <span class="text-danger">LATE</span></b><br>
-									<cfelse>
-										<b>Clock-In : <span class="text-success">ON TIME</span></b><br>
-									</cfif>
-									<cfif TimeFormat(clock_out_datetime,'hh:nn:ss') LT '05:00:00'>
-										<b>Clock-Out : <span class="text-danger">EARLY</span></b><br>
-									<cfelse>
-										<b>Clock-Out : <span class="text-success">ON TIME</span></b><br>
-									</cfif>
+									#payment_datetime#
 								</td>
 								<td class="text-center"></td>
 							</tr>

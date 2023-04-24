@@ -1,4 +1,9 @@
 <cfoutput>
+
+   <cfquery name="get_data" datasource="higher">
+      SELECT * FROM users
+      limit 1
+   </cfquery>
    <div class="row">
       <div class="col-sm-12">
 

@@ -14,8 +14,7 @@
     </form>
 
     <script>
-      var $button_save = $('<button class="btn btn-action btn-success ladda-button " data-style="zoom-in"><span class="ladda-label">Submit</span></button>');
-      $('##' + BootstrapDialogTopId() + ' .bootstrap-dialog-footer-buttons').prepend($button_save);
+    
     </script>
 
 </cfoutput>
