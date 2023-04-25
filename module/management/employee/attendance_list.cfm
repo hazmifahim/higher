@@ -60,12 +60,12 @@
 								<td class="text-center">#TimeFormat(clock_in_datetime,'hh:nn:ss tt')#</td>
 								<td class="text-center">#TimeFormat(clock_out_datetime,'hh:nn:ss tt')#</td>
 								<td class="text-center">
-									<cfif TimeFormat(clock_in_datetime,'hh:nn:ss') GT '08:00:00'>
+									<cfif TimeFormat(clock_in_datetime,'HH:nn:ss') GT '08:00:00'>
 										<b>Clock-In : <span class="text-danger">LATE</span></b><br>
 									<cfelse>
 										<b>Clock-In : <span class="text-success">ON TIME</span></b><br>
 									</cfif>
-									<cfif TimeFormat(clock_out_datetime,'hh:nn:ss') LT '05:00:00'>
+									<cfif TimeFormat(clock_out_datetime,'HH:nn:ss') LT '17:00:00'>
 										<b>Clock-Out : <span class="text-danger">EARLY</span></b><br>
 									<cfelse>
 										<b>Clock-Out : <span class="text-success">ON TIME</span></b><br>
@@ -92,7 +92,7 @@
 		"searching": true,
 		"ordering": false,
 		"ajax": $.fn.dataTable.pipeline({
-			url: "attendance_list_data.cfm"
+			url: "module/management/employee/attendance_list_data.cfm"
 			//pages: 5, // number of pages to cache
 		}),
 		"aoColumnDefs": 

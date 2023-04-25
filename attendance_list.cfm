@@ -90,7 +90,11 @@
 				"sClass": "text-center",
 				render: function (data, type, row) {
 					const newDate = new Date(data);
+					if (data == "") {
+						return ''
+					} else {
 					return newDate.toLocaleTimeString();
+					}
 				}
 			},
 			{
@@ -134,8 +138,18 @@
 					{
 						label: 'Submit',
 						cssClass: 'btn-primary',
-						data: {
-							id: 'btn-confirm'
+						action: function(dialogItself){
+							var clock_in = $("##clock_in").val();
+							var clock_out = $("##clock_out").val();
+
+							$.post("attendance_act.cfm", //Required URL of the page on server
+							{ // Data Sending With Request To Server
+								clock_in:clock_in,
+								clock_out:clock_out,
+								userid:data
+							},
+							function(){ // Required Callback Function
+							}, "script");
 						}
 					}]
 				});
