@@ -30,7 +30,7 @@
 
 </style>
 
-<cfset table_id = 'all_booking_list'>
+<cfset table_id = 'attendance_list'>
 
 <div class="row mt-5">
 	<div class="col-md-12">
@@ -108,6 +108,11 @@
 			}
 		]
 	});
+
+	reload_#table_id# = function() {
+      #table_id#.clearPipeline();
+		#table_id#.ajax.reload(null, false);
+    }
 
 	function open_modal(process,data) 
 		{

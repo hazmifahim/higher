@@ -26,6 +26,21 @@
                 )
             </cfquery>
         </cfif>
+
+        Swal.fire({
+            title: 'Attendance Has Been Updated',
+            text: 'Lets Go!',
+            icon: 'success',
+            confirmButtonText: 'Okay'
+         }).then((result) => {
+      
+            BootstrapDialog.closeAll();
+      
+            if (typeof reload_attendance_list == 'function')
+                  {
+                      reload_attendance_list();
+                  }
+         });
   
     </cftransaction>
 </cfoutput>
