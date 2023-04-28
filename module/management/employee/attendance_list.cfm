@@ -145,6 +145,8 @@
 				});
 		}
 
+		console.log('xxx')
+
 </script>
 
 </cfoutput>

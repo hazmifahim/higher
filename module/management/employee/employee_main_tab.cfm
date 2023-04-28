@@ -45,7 +45,8 @@
 
 <script>
 
-   loadTabContent();
+   loadTabContent()
+   
    
 </script>
 
