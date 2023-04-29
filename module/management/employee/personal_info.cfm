@@ -198,6 +198,31 @@
                   </div>
                </div>
             </div>
+
+            <hr class="mb-space">
+            <div class="row mb-space">
+               <div class="col-sm-6">
+                  <div class="row">
+                     <label class="col-sm-4 col-form-label">Salary Paid Method </label>
+                     <div class="col-sm-8">
+                        <select class="form-control" id="paid_method" name="paid_method">
+                           <option value="">Please choose...</option>
+                           <option value="1">Monthly</option>
+                           <option value="2">Daily</option>
+                           <option value="3">Per Trip</option>
+                        </select>
+                     </div>
+                  </div>
+              </div>
+              <div class="col-sm-6">
+                  <div class="row">
+                      <label class="col-sm-4 col-form-label">Rate (RM) </label>
+                      <div class="col-sm-8">
+                          <input type="text" id="fullname" name="fullname" class="form-control">
+                      </div>
+                  </div>
+              </div>
+            </div>
          </div>
 
          <div class="button_block mt-2"><button type="button" onclick="submit_flight_form();" class="btn cur-p btn-primary">Submit</button></div>
