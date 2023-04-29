@@ -53,7 +53,7 @@
 							<th class="text-center"></th>
 						</tr>
 						
-						<cfloop query="get_attendance">
+						<!--- <cfloop query="get_attendance">
 							<tr>
 								<td class="text-center">#currentrow#</td>
 								<td class="text-center">#dateFormat(created_date,'dd-mm-yyyy')#</td>
@@ -73,7 +73,7 @@
 								</td>
 								<td class="text-center"></td>
 							</tr>
-						</cfloop>
+						</cfloop> --->
 						
 					</thead>
 				</table>
@@ -92,7 +92,12 @@
 		"searching": true,
 		"ordering": false,
 		"ajax": $.fn.dataTable.pipeline({
-			url: "module/management/employee/attendance_list_data.cfm"
+			url: "module/management/employee/attendance_list_data.cfm",
+			type: "POST",
+			dataType: "script",
+			data: {
+				user_id: #url.employee_id#
+			}
 			//pages: 5, // number of pages to cache
 		}),
 		"aoColumnDefs": 
@@ -102,6 +107,48 @@
 				"sClass": "text-center",
 				render: function (data, type, row, meta) {
 					return meta.row + meta.settings._iDisplayStart + 1;
+				}
+			},
+			{
+				"aTargets": [ 1 ],
+				"sClass": "text-center",
+				"mRender": function ( data, type, row ) {
+					return moment(data).format("DD/MM/YYYY");
+				}
+			},
+			{
+				"aTargets": [ 2,3 ],
+				"sClass": "text-center",
+				render: function (data,type,full)
+				{
+					var now = new Date(data);
+					var time = now.toLocaleTimeString();
+
+					return time;
+				}
+			},
+			{
+				"aTargets": [ 4 ],
+				"sClass": "text-center",
+				"mRender": function ( data, type, row ) {
+					var date_in = new Date(row[2]);
+					var date_out = new Date(row[3]);
+
+					var date_in_time = date_in.getHours().toString().padStart(2, '0') + ':' + date_in.getMinutes().toString().padStart(2, '0') + ':' + date_in.getSeconds().toString().padStart(2, '0');
+					var date_out_time = date_out.getHours().toString().padStart(2, '0') + ':' + date_out.getMinutes().toString().padStart(2, '0') + ':' + date_in.getSeconds().toString().padStart(2, '0');
+					
+					if (date_in_time > '9:00:00') {
+						return 'late'
+					} else {
+						return 'early'
+					}
+
+					if (date_out_time > '17:00:00') {
+						return 'on time'
+					} else {
+						return 'early'
+					}
+
 				}
 			},
 			{
@@ -144,8 +191,6 @@
 					}]
 				});
 		}
-
-		console.log('xxx')
 
 </script>
 

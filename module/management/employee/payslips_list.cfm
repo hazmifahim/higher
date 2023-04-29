@@ -37,7 +37,7 @@
 	
 </cfquery>
 
-<cfset table_id = 'attendance_record'>
+<cfset table_id = 'payslips_record'>
 
 <div class="row">
 	<div class="col-sm-12">
@@ -46,14 +46,14 @@
 					<thead>
 						<tr>
 							<th class="text-center" style="width:5%">No.</th>
-							<th class="text-center">Month</th>
+							<th class="text-center">Month / Year</th>
 							<th class="text-center">Total Payment (RM)</th>
 							<th class="text-center">Payment Status</th>
 							<th class="text-center">Payment Date</th>
 							<th class="text-center"></th>
 						</tr>
 						
-						<cfloop query="get_payslips">
+						<!--- <cfloop query="get_payslips">
 							<tr>
 								<td class="text-center">#currentrow#</td>
 								<td class="text-center">#month# / #year#</td>
@@ -64,7 +64,7 @@
 								</td>
 								<td class="text-center"></td>
 							</tr>
-						</cfloop>
+						</cfloop> --->
 						
 					</thead>
 				</table>
@@ -83,8 +83,12 @@
 		"searching": true,
 		"ordering": false,
 		"ajax": $.fn.dataTable.pipeline({
-			url: "attendance_list_data.cfm"
-			//pages: 5, // number of pages to cache
+			url: "module/management/employee/payslips_list_data.cfm",
+			type: "POST",
+			dataType: "script",
+			data: {
+				user_id: #url.employee_id#
+			}
 		}),
 		"aoColumnDefs": 
 		[
@@ -96,11 +100,51 @@
 				}
 			},
 			{
+				"aTargets": [ 1 ],
+				"sClass": "text-center",
+				render: function (data,type,full)
+				{
+					var monthNumber = data;
+					var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+					var monthName = monthNames[monthNumber - 1];
+
+					return monthName+' '+full[5];
+				}
+			},
+			{
+				"aTargets": [ 2 ],
+				"sClass": "text-right",
+				render: function (data,type,full)
+				{
+					return $.fn.dataTable.render.number(',', '.', 2).display(data);
+				}
+			},
+			{
+				"aTargets": [ 3 ],
+				"sClass": "text-center",
+				render: function (data,type,full)
+				{
+					if (data == '' || data == null)
+					{
+						return '<span class="text-danger">UNPAID</span>'
+					} else {
+						return '<span class="text-success">PAID</span>'
+					}
+				}
+			},
+			{
+				"aTargets": [ 4 ],
+				"sClass": "text-center",
+				"mRender": function ( data, type, row ) {
+				return moment(data).format("DD/MM/YYYY");
+				}
+			},
+			{
 				"aTargets": [5],
 				"sClass": "text-center",
 				render: function (data, type, full) {
 
-					var info_btn = '<a type="button" title="Kemaskini" onclick="open_modal(\'info\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-pencil"></i></a>';
+					var info_btn = '<a type="button" title="Kemaskini" onclick="open_modal(\'info\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-print"></i></a>';
 					return info_btn;
 				}
 			}

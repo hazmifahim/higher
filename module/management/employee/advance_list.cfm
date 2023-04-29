@@ -53,7 +53,7 @@
 							<th class="text-center"></th>
 						</tr>
 						
-						<cfloop query="get_advance">
+						<!--- <cfloop query="get_advance">
 							<tr>
 								<td class="text-center">#currentrow#</td>
 								<td class="text-center">#month#</td>
@@ -65,7 +65,7 @@
 								</td>
 								<td class="text-center"></td>
 							</tr>
-						</cfloop>
+						</cfloop> --->
 						
 					</thead>
 				</table>
@@ -84,8 +84,12 @@
 		"searching": true,
 		"ordering": false,
 		"ajax": $.fn.dataTable.pipeline({
-			url: "advance_list_data.cfm"
-			//pages: 5, // number of pages to cache
+			url: "module/management/employee/advance_list_data.cfm",
+			type: "POST",
+			dataType: "script",
+			data: {
+				user_id: #url.employee_id#
+			}
 		}),
 		"aoColumnDefs": 
 		[
@@ -97,11 +101,55 @@
 				}
 			},
 			{
-				"aTargets": [5],
+				"aTargets": [ 1 ],
+				"sClass": "text-center",
+				render: function (data,type,full)
+				{
+					var monthNumber = data;
+					var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+					var monthName = monthNames[monthNumber - 1];
+
+					return monthName;
+				}
+			},
+			{
+				"aTargets": [ 2 ],
+				"sClass": "text-center"
+			},
+			{
+				"aTargets": [ 3 ],
+				"sClass": "text-right",
+				render: function (data,type,full)
+				{
+					return $.fn.dataTable.render.number(',', '.', 2).display(data);
+				}
+			},
+			{
+				"aTargets": [ 4 ],
+				"sClass": "text-center",
+				render: function (data,type,full)
+				{
+					if (data == '' || data == null)
+					{
+						return '<span class="text-danger">UNPAID</span>'
+					} else {
+						return '<span class="text-success">PAID</span>'
+					}
+				}
+			},
+			{
+				"aTargets": [ 5 ],
+				"sClass": "text-center",
+				"mRender": function ( data, type, row ) {
+					return moment(data).format("DD/MM/YYYY");
+				}
+			},
+			{
+				"aTargets": [6],
 				"sClass": "text-center",
 				render: function (data, type, full) {
 
-					var info_btn = '<a type="button" title="Kemaskini" onclick="open_modal(\'info\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-pencil"></i></a>';
+					var info_btn = '<a type="button" title="Kemaskini" onclick="open_modal(\'info\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-print"></i></a>';
 					return info_btn;
 				}
 			}
