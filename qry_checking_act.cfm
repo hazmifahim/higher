@@ -283,6 +283,23 @@
 			</cfquery>     
 		</cfcatch>
 	</cftry>
+
+	<cftry>
+		<cfquery datasource="higher">
+			SELECT `salary_method` FROM `users`
+		</cfquery>
+		<cfcatch type="database">
+			<br>Auto generated
+			<br>ALTER TABLE `users` 
+			<br>ADD COLUMN `salary_method` INT(11) NULL,
+			<br>ADD COLUMN `salary_rate` DOUBLE(11,2) NULL
+			<cfquery datasource="higher">
+				ALTER TABLE `users` 
+				ADD COLUMN `salary_method` INT(11) NULL,
+				ADD COLUMN `salary_rate` DOUBLE(11,2) NULL
+			</cfquery>     
+		</cfcatch>
+	</cftry>
 	
 	<br><br>End of checking
 
