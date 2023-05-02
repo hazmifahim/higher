@@ -30,7 +30,7 @@
 
 </style>
 
-<cfset table_id = 'attendance_list'>
+<cfset table_id = 'advance_list'>
 
 <div class="row mt-5">
 	<div class="col-md-12">
@@ -73,7 +73,7 @@
 		"searching": true,
 		"ordering": false,
 		"ajax": $.fn.dataTable.pipeline({
-			url: "attendance_list_data.cfm"
+			url: "module/management/advance_salary/advance_list_data.cfm"
 			//pages: 5, // number of pages to cache
 		}),
 		"aoColumnDefs": 

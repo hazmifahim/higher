@@ -36,7 +36,7 @@
 	ORDER BY `created_date` DESC
 </cfquery>
 
-<cfset table_id = 'advance_record'>
+<cfset table_id = 'advance_recordx'>
 
 <div class="row">
 	<div class="col-sm-12">

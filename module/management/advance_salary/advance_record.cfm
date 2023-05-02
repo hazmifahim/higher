@@ -30,14 +30,12 @@
 
 </style>
 
-<cfquery name="get_attendance" datasource="higher">
-	SELECT * FROM `attendance`
-	WHERE `user_id` = #url.employee_id#
+<cfquery name="get_advance" datasource="higher">
+	SELECT * FROM `advance_salary`
 	ORDER BY `created_date` DESC
-	
 </cfquery>
 
-<cfset table_id = 'attendance_recordx'>
+<cfset table_id = 'advance_record'>
 
 <div class="row">
 	<div class="col-sm-12">
@@ -46,30 +44,23 @@
 					<thead>
 						<tr>
 							<th class="text-center" style="width:5%">No.</th>
-							<th class="text-center">Date</th>
-							<th class="text-center">Clock In</th>
-							<th class="text-center">Clock Out</th>
-							<th class="text-center">Status</th>
+							<th class="text-center">Month</th>
+							<th class="text-center">Year</th>
+							<th class="text-center">Total Advance (RM)</th>
+							<th class="text-center">Payment Status</th>
+							<th class="text-center">Payment Date</th>
 							<th class="text-center"></th>
 						</tr>
 						
-						<!--- <cfloop query="get_attendance">
+						<!--- <cfloop query="get_advance">
 							<tr>
 								<td class="text-center">#currentrow#</td>
-								<td class="text-center">#dateFormat(created_date,'dd-mm-yyyy')#</td>
-								<td class="text-center">#TimeFormat(clock_in_datetime,'hh:nn:ss tt')#</td>
-								<td class="text-center">#TimeFormat(clock_out_datetime,'hh:nn:ss tt')#</td>
+								<td class="text-center">#month#</td>
+								<td class="text-center">#year#</td>
+								<td class="text-center">#numberformat(advance_amount,'__,__.00')#</td>
+								<td class="text-center">PAID</td>
 								<td class="text-center">
-									<cfif TimeFormat(clock_in_datetime,'HH:nn:ss') GT '08:00:00'>
-										<b>Clock-In : <span class="text-danger">LATE</span></b><br>
-									<cfelse>
-										<b>Clock-In : <span class="text-success">ON TIME</span></b><br>
-									</cfif>
-									<cfif TimeFormat(clock_out_datetime,'HH:nn:ss') LT '17:00:00'>
-										<b>Clock-Out : <span class="text-danger">EARLY</span></b><br>
-									<cfelse>
-										<b>Clock-Out : <span class="text-success">ON TIME</span></b><br>
-									</cfif>
+									#payment_datetime#
 								</td>
 								<td class="text-center"></td>
 							</tr>
@@ -92,13 +83,9 @@
 		"searching": true,
 		"ordering": false,
 		"ajax": $.fn.dataTable.pipeline({
-			url: "module/management/employee/attendance_list_data.cfm",
+			url: "module/management/advance_salary/advance_record_data.cfm",
 			type: "POST",
-			dataType: "script",
-			data: {
-				user_id: #url.employee_id#
-			}
-			//pages: 5, // number of pages to cache
+			dataType: "script"
 		}),
 		"aoColumnDefs": 
 		[
@@ -112,51 +99,53 @@
 			{
 				"aTargets": [ 1 ],
 				"sClass": "text-center",
-				"mRender": function ( data, type, row ) {
-					return moment(data).format("DD/MM/YYYY");
+				render: function (data,type,full)
+				{
+					var monthNumber = data;
+					var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+					var monthName = monthNames[monthNumber - 1];
+
+					return monthName;
 				}
 			},
 			{
-				"aTargets": [ 2,3 ],
-				"sClass": "text-center",
+				"aTargets": [ 2 ],
+				"sClass": "text-center"
+			},
+			{
+				"aTargets": [ 3 ],
+				"sClass": "text-right",
 				render: function (data,type,full)
 				{
-					var now = new Date(data);
-					var time = now.toLocaleTimeString();
-
-					return time;
+					return $.fn.dataTable.render.number(',', '.', 2).display(data);
 				}
 			},
 			{
 				"aTargets": [ 4 ],
 				"sClass": "text-center",
-				"mRender": function ( data, type, row ) {
-					var date_in = new Date(row[2]);
-					var date_out = new Date(row[3]);
-
-					var date_in_time = date_in.getHours().toString().padStart(2, '0') + ':' + date_in.getMinutes().toString().padStart(2, '0') + ':' + date_in.getSeconds().toString().padStart(2, '0');
-					var date_out_time = date_out.getHours().toString().padStart(2, '0') + ':' + date_out.getMinutes().toString().padStart(2, '0') + ':' + date_in.getSeconds().toString().padStart(2, '0');
-					
-					if (date_in_time > '9:00:00') {
-						return 'late'
+				render: function (data,type,full)
+				{
+					if (data == '' || data == null)
+					{
+						return '<span class="text-danger">UNPAID</span>'
 					} else {
-						return 'early'
+						return '<span class="text-success">PAID</span>'
 					}
-
-					if (date_out_time > '17:00:00') {
-						return 'on time'
-					} else {
-						return 'early'
-					}
-
 				}
 			},
 			{
-				"aTargets": [5],
+				"aTargets": [ 5 ],
+				"sClass": "text-center",
+				"mRender": function ( data, type, row ) {
+					return moment(data).format("DD/MM/YYYY");
+				}
+			},
+			{
+				"aTargets": [6],
 				"sClass": "text-center",
 				render: function (data, type, full) {
 
-					var info_btn = '<a type="button" title="Kemaskini" onclick="open_modal(\'info\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-pencil"></i></a>';
+					var info_btn = '<a type="button" title="Kemaskini" onclick="open_modal(\'info\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-print"></i></a>';
 					return info_btn;
 				}
 			}
@@ -172,7 +161,7 @@
 				});
 
 				var title = 'Attendance Info';
-				var target = 'attendance_form.cfm?'+param;
+				var target = 'advance_form.cfm?'+param;
 			}
 
 			BootstrapDialog.show({

@@ -1,6 +1,8 @@
 <cfoutput>
   <cfsetting showDebugOutput="No">
 
+  <cfset hashedPassword = hash(form.password, "SHA-256")>
+
   <cfquery name="getUser" datasource="higher">
     SELECT *
     FROM users
@@ -17,7 +19,7 @@
       confirmButtonText: 'Okay'
     })
   <cfelse>
-    <cfif getUser.password neq form.password>
+    <cfif getUser.password neq hashedPassword>
       Swal.fire({
         title: 'Oops',
         text: 'Wrong Username or Password',
