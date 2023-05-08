@@ -83,6 +83,12 @@
                         </ul>
                      </li>
                      <li>
+                        <a href="##payroll" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-usd green_color"></i> <span>Payroll</span></a>
+                        <ul class="collapse list-unstyled" id="payroll">
+                           <li><a style="cursor:pointer" id="payroll_record">> <span>Payroll Record</span></a></li>
+                        </ul>
+                     </li>
+                     <li>
                         <a href="##bookings" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-list blue2_color"></i> <span>Bookings</span></a>
                         <ul class="collapse list-unstyled" id="bookings">
                            <li><a id="booking_register" href="##">> <span>Register New Booking</span></a></li>
@@ -268,6 +274,10 @@
 
       $("##advance_record").click(function(){
          loadContent("module/management/advance_salary/advance_record.cfm");
+      });
+
+      $("##payroll_record").click(function(){
+         loadContent("module/management/payroll/payroll_record.cfm");
       });
 
    </script>

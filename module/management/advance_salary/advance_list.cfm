@@ -37,7 +37,7 @@
 	   <div class="white_shd full margin_bottom_30">
 		  <div class="full graph_head">
 			 <div class="heading1 margin_0">
-				<h2>Attendance For <b>#dateFormat(now(),'dd-mm-yyyy')#</b></h2>
+				<h2>Advance For <b>#dateFormat(now(),'dd-mm-yyyy')#</b></h2>
 			 </div>
 		  </div>
 		  <div class="full price_table padding_infor_info">

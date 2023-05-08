@@ -35,7 +35,7 @@
 	ORDER BY `created_date` DESC
 </cfquery>
 
-<cfset table_id = 'advance_record_list'>
+<cfset table_id = 'payroll_record_list'>
 
 <div class="row mt-5">
 	<div class="col-sm-12">
@@ -43,7 +43,7 @@
 		<div class="white_shd full margin_bottom_30">
 			<div class="full graph_head">
 			   <div class="heading1 margin_0">
-				  <h2>Advance Record</b></h2>
+				  <h2>Payroll Record</b></h2>
 			   </div>
 			</div>
 		  <div class="full price_table padding_infor_info">
@@ -53,7 +53,7 @@
 							<th class="text-center" style="width:5%">No.</th>
 							<th class="text-center">Month</th>
 							<th class="text-center">Year</th>
-							<th class="text-center">Total Advance (RM)</th>
+							<th class="text-center">Total Salary (RM)</th>
 							<th class="text-center">Payment Status</th>
 							<th class="text-center">Payment Date</th>
 							<th class="text-center"></th>
@@ -90,7 +90,7 @@
 		"searching": true,
 		"ordering": false,
 		"ajax": $.fn.dataTable.pipeline({
-			url: "module/management/advance_salary/advance_record_data.cfm",
+			url: "module/management/payroll/payroll_record_data.cfm",
 			type: "POST",
 			dataType: "script"
 		}),

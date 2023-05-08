@@ -42,11 +42,11 @@
 		  </div>
 		  <div class="full price_table padding_infor_info">
 
-
 				<table id="#table_id#" class="table table-bordered small-font table-striped table-hover" cellspacing="0" width="100%">
 					<thead>
 						<tr>
 							<th class="text-center" style="width:5%">No.</th>
+							<th class="text-center">Date</th>
 							<th class="text-center">Name</th>
 							<th class="text-center">I.C Number</th>
 							<th class="text-center">Clock In</th>
@@ -86,7 +86,14 @@
 				}
 			},
 			{
-				"aTargets": [3,4],
+				"aTargets": [ 1 ],
+				"sClass": "text-center",
+				"mRender": function ( data, type, row ) {
+					return moment(data).format("DD/MM/YYYY");
+				}
+			},
+			{
+				"aTargets": [4,5],
 				"sClass": "text-center",
 				render: function (data, type, row) {
 					const newDate = new Date(data);
@@ -98,12 +105,24 @@
 				}
 			},
 			{
-				"aTargets": [5],
+				"aTargets": [4,5],
+				"sClass": "text-center",
+				render: function (data, type, row) {
+					const newDate = new Date(data);
+					if (data == "") {
+						return ''
+					} else {
+					return newDate.toLocaleTimeString();
+					}
+				}
+			},
+			{
+				"aTargets": [6],
 				"sClass": "text-center",
 				render: function (data, type, full) {
 
 					var info_btn = '<a type="button" title="Kemaskini" onclick="open_modal(\'info\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-pencil"></i></a>';
-					return info_btn;
+					return '';
 				}
 			}
 		]
