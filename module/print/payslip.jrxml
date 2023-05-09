@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pemeriksaan Aset Tak Alih" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="758" leftMargin="42" rightMargin="42" topMargin="28" bottomMargin="28" uuid="9e386e0c-a9e9-4062-85fd-23db9a7cc6a5">
+	<property name="ireport.zoom" value="1.3310000000000064"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<pageHeader>
+		<band height="70"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="174" splitType="Stretch">
+			<staticText>
+				<reportElement x="240" y="63" width="100" height="20" uuid="51495c41-2ce4-4f1e-bf54-8950668250a5"/>
+				<text><![CDATA[hi]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch"/>
+	</detail>
+	<pageFooter>
+		<band height="123"/>
+	</pageFooter>
+</jasperReport>

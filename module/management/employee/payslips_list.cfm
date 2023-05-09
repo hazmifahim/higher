@@ -153,21 +153,21 @@
 
 	function open_modal(process,data) 
 		{
-			if(process == 'info')
-			{
-				let param = $.param({
-					id: data
-				});
+			if(process == 'payslip')
+				{
+					let param = $.param({
+				
+					});
 
-				var title = 'Attendance Info';
-				var target = 'attendance_form.cfm?'+param;
-			}
+					var refh = 'higher/module/print/payslip.cfm';
+					var encodedRef = encodeURIComponent(refh);
+				}
 
 			BootstrapDialog.show({
 				size: BootstrapDialog.SIZE_WIDE,
 				type: 	BootstrapDialog.TYPE_PRIMARY,
-				title: title,
-				message: $('<div></div>').load(target),
+				title: 'Payslip For',
+				message: '<div><iframe width="100%" height="800px" frameborder="0" scrolling="no" src="scripts/pdfjs/web/goviewer.cfm?file='+encodedRef+'"></iframe></div>',
 				closable: true,
 				closeByBackdrop: true,
 				closeByKeyboard: false,
