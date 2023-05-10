@@ -144,14 +144,14 @@
 				"sClass": "text-center",
 				render: function (data, type, full) {
 
-					var info_btn = '<a type="button" title="Kemaskini" onclick="open_modal(\'info\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-print"></i></a>';
+					var info_btn = '<a type="button" title="Kemaskini" onclick="print_payslip(\'info\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-print"></i></a>';
 					return info_btn;
 				}
 			}
 		]
 	});
 
-	function open_modal(process,data) 
+	function print_payslip(process,data) 
 		{
 			if(process == 'payslip')
 				{
@@ -167,7 +167,7 @@
 				size: BootstrapDialog.SIZE_WIDE,
 				type: 	BootstrapDialog.TYPE_PRIMARY,
 				title: 'Payslip For',
-				message: '<div><iframe width="100%" height="800px" frameborder="0" scrolling="no" src="scripts/pdfjs/web/goviewer.cfm?file='+encodedRef+'"></iframe></div>',
+				message: '<div><iframe width="100%" height="800px" frameborder="0" scrolling="no" src="plugin/pdfjs/web/goviewer.cfm?file='+encodedRef+'"></iframe></div>',
 				closable: true,
 				closeByBackdrop: true,
 				closeByKeyboard: false,
