@@ -1,6 +1,6 @@
 <cfsetting showDebugOutput="No">
 <cfset dataSource= 'higher'>
-<cfset tableFields= ['id','month','year','advance_amount','id','payment_date']>
+<cfset tableFields= ['id','month','year','fullname','net_amount','id','payment_datetime']>
 <cfset noOfTableFields = ArrayLen(tableFields)>
 <cfset searchFields= ['fullname', 'ic_no']>
 <cfset noOfSearchFields = ArrayLen(searchFields)>
@@ -53,16 +53,17 @@
 	<cfset queryLimit=''>
 </cfif>
 <cfquery name="queryResult" datasource="#datasource#">
-	SELECT * FROM `advance_salary`
-	ORDER BY `created_date` DESC
+	SELECT t1.*, t2.`fullname` FROM `payslips` t1 
+	INNER JOIN `users` t2 ON t2.`id` = t1.`user_id`
+	ORDER BY t1.`created_date` DESC
 
 	#PreserveSingleQuotes(queryWhere)# 
 </cfquery>
 
 <cfquery name="querycount" datasource="#datasource#">
-	SELECT COUNT(id) AS total 
-	FROM `advance_salary` 
-
+	SELECT COUNT(t1.id) AS total 
+	FROM `payslips` t1
+	INNER JOIN `users` t2 ON t2.`id` = t1.`user_id`
 	#PreserveSingleQuotes(queryWhere)#
 </cfquery>
 <cfsavecontent variable="datatablesjson"><cfloop from="1" to="#queryResult.RecordCount#" index="counter"><cfoutput>[<cfloop from="1"  to="#noOfTableFields#" index="innerCounter"><cfif tableFields[innerCounter] EQ "start_date">"#JSStringFormat(dateformat(queryResult[tableFields[innerCounter]][counter],'yyyy/mm/dd'))#"<cfelse>"#replacenocase(JSStringFormat(queryResult[rereplace(tableFields[innerCounter],'"','','all')][counter]),"\'","'","all")#"</cfif><cfif innerCounter LT noOfTableFields>,</cfif></cfloop>]<cfif counter LT queryResult.RecordCount>,</cfif></cfoutput></cfloop></cfsavecontent>

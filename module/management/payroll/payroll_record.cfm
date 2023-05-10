@@ -45,6 +45,9 @@
 			   <div class="heading1 margin_0">
 				  <h2>Payroll Record</b></h2>
 			   </div>
+			   <div class="pull-right box-tools">
+				<a id="btn-reg-verification" onclick="open_modal()" class="btn btn-sm btn-primary" data-type="modal" title="Generate Payroll" data-title="Generate Payroll"><i class="fa fa-plus"></i> Generate Payroll</a>
+			</div>
 			</div>
 		  <div class="full price_table padding_infor_info">
 				<table id="#table_id#" class="table table-bordered small-font table-striped table-hover" cellspacing="0" width="100%">
@@ -53,6 +56,7 @@
 							<th class="text-center" style="width:5%">No.</th>
 							<th class="text-center">Month</th>
 							<th class="text-center">Year</th>
+							<th class="text-center">Name</th>
 							<th class="text-center">Total Salary (RM)</th>
 							<th class="text-center">Payment Status</th>
 							<th class="text-center">Payment Date</th>
@@ -120,7 +124,7 @@
 				"sClass": "text-center"
 			},
 			{
-				"aTargets": [ 3 ],
+				"aTargets": [ 4 ],
 				"sClass": "text-right",
 				render: function (data,type,full)
 				{
@@ -128,7 +132,7 @@
 				}
 			},
 			{
-				"aTargets": [ 4 ],
+				"aTargets": [ 5 ],
 				"sClass": "text-center",
 				render: function (data,type,full)
 				{
@@ -141,52 +145,67 @@
 				}
 			},
 			{
-				"aTargets": [ 5 ],
+				"aTargets": [ 6 ],
 				"sClass": "text-center",
 				"mRender": function ( data, type, row ) {
 					return moment(data).format("DD/MM/YYYY");
 				}
 			},
 			{
-				"aTargets": [6],
+				"aTargets": [ 7 ],
 				"sClass": "text-center",
 				render: function (data, type, full) {
 
-					var info_btn = '<a type="button" title="Kemaskini" onclick="open_modal(\'info\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-print"></i></a>';
-					return info_btn;
+					var info_btn = '<a type="button" title="Kemaskini" onclick="open_modal(\'info\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-pencil"></i></a>';
+					var print_btn = '<a type="button" title="Kemaskini" onclick="open_modal(\'info\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-print"></i></a>';
+					return info_btn+ ' ' +print_btn;
 				}
 			}
 		]
 	});
 
-	function open_modal(process,data) 
-		{
-			if(process == 'info')
-			{
-				let param = $.param({
-					id: data
-				});
+	reload_#table_id# = function() {
+      #table_id#.clearPipeline();
+		#table_id#.ajax.reload(null, false);
+    }
 
-				var title = 'Attendance Info';
-				var target = 'advance_form.cfm?'+param;
-			}
+	function open_modal() 
+	{
+		var title = 'Generate Payroll';
+		var target = 'module/management/payroll/payroll_form.cfm?';
+	
+		BootstrapDialog.show({
+			size: BootstrapDialog.SIZE_NORMAL,
+			type: 	BootstrapDialog.TYPE_PRIMARY,
+			title: title,
+			message: $('<div></div>').load(target),
+			closable: true,
+			closeByBackdrop: true,
+			closeByKeyboard: false,
+			buttons: [{
+					label: 'Close',
+					action: function(dialogItself){
+						dialogItself.close();
+					}
+				},
+				{
+					label: 'Generate',
+					cssClass: 'btn-primary',
+					action: function(dialogItself){
+						var month = $("##month").val();
+						var year = $("##year").val();
 
-			BootstrapDialog.show({
-				size: BootstrapDialog.SIZE_WIDE,
-				type: 	BootstrapDialog.TYPE_PRIMARY,
-				title: title,
-				message: $('<div></div>').load(target),
-				closable: true,
-				closeByBackdrop: true,
-				closeByKeyboard: false,
-				buttons: [{
-						label: 'Close',
-						action: function(dialogItself){
-							dialogItself.close();
-						}
-					}]
-				});
-		}
+						$.post("module/management/payroll/generate_payroll.cfm", //Required URL of the page on server
+						{ // Data Sending With Request To Server
+							month:month,
+							year:year
+						},
+						function(){ // Required Callback Function
+						}, "script");
+					}
+				}]
+			});
+	}
 
 </script>
 

@@ -28,8 +28,8 @@
         </cfif>
 
         Swal.fire({
-            title: 'Attendance Has Been Updated',
-            text: 'Lets Go!',
+            title: 'Success',
+            text: 'Attendance Has Been Updated',
             icon: 'success',
             confirmButtonText: 'Okay'
          }).then((result) => {
