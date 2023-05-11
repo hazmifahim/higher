@@ -144,7 +144,7 @@
 				"sClass": "text-center",
 				render: function (data, type, full) {
 
-					var info_btn = '<a type="button" title="Kemaskini" onclick="print_payslip(\'info\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-print"></i></a>';
+					var info_btn = '<a type="button" title="Kemaskini" onclick="print_payslip(\'payslip\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-print"></i></a>';
 					return info_btn;
 				}
 			}
@@ -159,7 +159,7 @@
 				
 					});
 
-					var refh = 'higher/module/print/payslip.cfm';
+					var refh = '/higher/module/print/payslip.cfm';
 					var encodedRef = encodeURIComponent(refh);
 				}
 

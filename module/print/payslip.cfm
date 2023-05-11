@@ -20,7 +20,7 @@
         conf = {
             paged = format EQ 'html',
             dataProvider = 'data',
-            fullname = data.fullname,
+            fullname = getData.fullname,
             jasperPath = 'payslip.jasper'
         };
 
