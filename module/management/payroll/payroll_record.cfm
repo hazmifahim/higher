@@ -46,8 +46,8 @@
 				  <h2>Payroll Record</b></h2>
 			   </div>
 			   <div class="pull-right box-tools">
-				<a id="btn-reg-verification" onclick="open_modal()" class="btn btn-sm btn-primary" data-type="modal" title="Generate Payroll" data-title="Generate Payroll"><i class="fa fa-plus"></i> Generate Payroll</a>
-			</div>
+					<a id="btn-reg-verification" onclick="open_modal()" class="btn btn-sm btn-primary" data-type="modal" title="Generate Payroll" data-title="Generate Payroll"><i class="fa fa-plus"></i> Generate Payroll</a>
+				</div>
 			</div>
 		  <div class="full price_table padding_infor_info">
 				<table id="#table_id#" class="table table-bordered small-font table-striped table-hover" cellspacing="0" width="100%">

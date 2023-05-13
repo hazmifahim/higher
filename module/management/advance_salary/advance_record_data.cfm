@@ -1,6 +1,6 @@
 <cfsetting showDebugOutput="No">
 <cfset dataSource= 'higher'>
-<cfset tableFields= ['id','month','year','advance_amount','id','payment_date']>
+<cfset tableFields= ['id','month','year','fullname','advance_amount','id','payment_date']>
 <cfset noOfTableFields = ArrayLen(tableFields)>
 <cfset searchFields= ['fullname', 'ic_no']>
 <cfset noOfSearchFields = ArrayLen(searchFields)>
@@ -53,8 +53,9 @@
 	<cfset queryLimit=''>
 </cfif>
 <cfquery name="queryResult" datasource="#datasource#">
-	SELECT * FROM `advance_salary`
-	ORDER BY `created_date` DESC
+	SELECT t1.*, t2.fullname FROM `advance_salary` t1
+	INNER JOIN users t2 ON t2.`id` = t1.`user_id`
+	ORDER BY t1.`created_date` DESC
 
 	#PreserveSingleQuotes(queryWhere)# 
 </cfquery>

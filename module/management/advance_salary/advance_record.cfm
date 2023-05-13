@@ -45,6 +45,9 @@
 			   <div class="heading1 margin_0">
 				  <h2>Advance Record</b></h2>
 			   </div>
+			   <div class="pull-right box-tools">
+					<a id="btn-reg-verification" onclick="open_modal()" class="btn btn-sm btn-primary" data-type="modal" title="Register Advance" data-title="Register Advance"><i class="fa fa-plus"></i> Register Advance</a>
+				</div>
 			</div>
 		  <div class="full price_table padding_infor_info">
 				<table id="#table_id#" class="table table-bordered small-font table-striped table-hover" cellspacing="0" width="100%">
@@ -53,6 +56,7 @@
 							<th class="text-center" style="width:5%">No.</th>
 							<th class="text-center">Month</th>
 							<th class="text-center">Year</th>
+							<th class="text-center">Name</th>
 							<th class="text-center">Total Advance (RM)</th>
 							<th class="text-center">Payment Status</th>
 							<th class="text-center">Payment Date</th>
@@ -120,7 +124,7 @@
 				"sClass": "text-center"
 			},
 			{
-				"aTargets": [ 3 ],
+				"aTargets": [ 4 ],
 				"sClass": "text-right",
 				render: function (data,type,full)
 				{
@@ -128,7 +132,7 @@
 				}
 			},
 			{
-				"aTargets": [ 4 ],
+				"aTargets": [ 5 ],
 				"sClass": "text-center",
 				render: function (data,type,full)
 				{
@@ -141,14 +145,14 @@
 				}
 			},
 			{
-				"aTargets": [ 5 ],
+				"aTargets": [ 6 ],
 				"sClass": "text-center",
 				"mRender": function ( data, type, row ) {
 					return moment(data).format("DD/MM/YYYY");
 				}
 			},
 			{
-				"aTargets": [6],
+				"aTargets": [ 7 ],
 				"sClass": "text-center",
 				render: function (data, type, full) {
 
@@ -159,34 +163,54 @@
 		]
 	});
 
-	function open_modal(process,data) 
-		{
-			if(process == 'info')
-			{
-				let param = $.param({
-					id: data
-				});
+	reload_#table_id# = function() {
+      #table_id#.clearPipeline();
+		#table_id#.ajax.reload(null, false);
+    }
 
-				var title = 'Attendance Info';
-				var target = 'advance_form.cfm?'+param;
-			}
+	function open_modal() 
+	{
+		var title = 'Advance Form';
+		var target = 'module/management/advance_salary/advance_form.cfm';
+	
+		BootstrapDialog.show({
+			size: BootstrapDialog.SIZE_WIDE,
+			type: 	BootstrapDialog.TYPE_PRIMARY,
+			title: title,
+			message: $('<div></div>').load(target),
+			closable: true,
+			closeByBackdrop: true,
+			closeByKeyboard: false,
+			buttons: [{
+					label: 'Close',
+					action: function(dialogItself){
+						dialogItself.close();
+					}
+				},
+				{
+					label: 'Submit',
+					cssClass: 'btn-primary',
+					action: function(dialogItself){
+						var month = $("##month").val();
+						var advance_amt = $("##advance_amt").val();
+						var payment_dt = $("##payment_dt").val();
+						var payment_ref = $("##payment_ref").val();
+						var user_id = $("##user_id").val();
 
-			BootstrapDialog.show({
-				size: BootstrapDialog.SIZE_WIDE,
-				type: 	BootstrapDialog.TYPE_PRIMARY,
-				title: title,
-				message: $('<div></div>').load(target),
-				closable: true,
-				closeByBackdrop: true,
-				closeByKeyboard: false,
-				buttons: [{
-						label: 'Close',
-						action: function(dialogItself){
-							dialogItself.close();
-						}
-					}]
-				});
-		}
+						$.post("module/management/advance_salary/advance_act.cfm", //Required URL of the page on server
+						{ // Data Sending With Request To Server
+							month:month,
+							advance_amt:advance_amt,
+							payment_dt:payment_dt,
+							payment_ref:payment_ref,
+							user_id:user_id
+						},
+						function(){ // Required Callback Function
+						}, "script");
+					}
+				}]
+			});
+	}
 
 </script>
 

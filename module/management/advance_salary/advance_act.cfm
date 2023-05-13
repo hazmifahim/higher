@@ -1,34 +1,35 @@
 <cfoutput>
     <cftransaction>
-        <cfquery name="chk_exist" datasource="higher">
-            SELECT * FROM `attendance`
-            WHERE `user_id` = #form.userid#
-            AND date(created_date) = date(NOW())
-        </cfquery>
 
         <cfif isdefined("chk_exist.recordCount") AND chk_exist.recordCount NEQ 0>
         
         <cfelse>
             <cfquery name="insert_new" datasource="higher">
-                INSERT INTO `attendance`
+                INSERT INTO `advance_salary`
                 (
                     `user_id`,
+                    `advance_amount`,
+                    `month`,
+                    `year`,
                     `created_date`,
-                    `clock_in_datetime`,
-                    `clock_out_datetime`
+                    `payment_date`,
+                    `payment_ref`
                 )
                 VALUES 
                 (
-                    #form.userid#,
+                    #form.user_id#,
+                    #form.advance_amt#,
+                    #form.month#,
+                    #year(now())#,
                     now(),
-                    '#dateFormat(now(),'yyyy-mm-dd')# #form.clock_in#',
-                    '#dateFormat(now(),'yyyy-mm-dd')# #form.clock_out#'
+                    '#form.payment_dt#',
+                    '#form.payment_ref#'
                 )
             </cfquery>
         </cfif>
 
         Swal.fire({
-            title: 'Attendance Has Been Updated',
+            title: 'Advance Has Been Added',
             text: 'Lets Go!',
             icon: 'success',
             confirmButtonText: 'Okay'
@@ -36,9 +37,9 @@
       
             BootstrapDialog.closeAll();
       
-            if (typeof reload_attendance_list == 'function')
+            if (typeof reload_advance_record_list == 'function')
                   {
-                      reload_attendance_list();
+                      reload_advance_record_list();
                   }
          });
   
