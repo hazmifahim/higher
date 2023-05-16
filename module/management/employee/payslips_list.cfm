@@ -156,10 +156,10 @@
 			if(process == 'payslip')
 				{
 					let param = $.param({
-				
+						id: data
 					});
 
-					var refh = '/higher/module/print/payslip.cfm';
+					var refh = '/higher/module/print/payslip.cfm?'+param;
 					var encodedRef = encodeURIComponent(refh);
 				}
 

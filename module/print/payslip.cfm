@@ -6,9 +6,15 @@
     <cfset rpt_dttm = 'Cetakan Pada #dateTimeFormat(now(),"dd/mm/yyyy hh:nn tt")#'>
 
     <cfquery name = "getData" datasource = "higher">
-        SELECT
-            *
-        FROM `users`
+       SELECT
+            t1.*,
+            t2.`fullname`
+        FROM
+            `payslips` t1
+        INNER JOIN `users` t2
+            ON t2.`id` = t1.`user_id`
+        WHERE t1.`id` = #url.id#
+        LIMIT 1
     </cfquery>
 
     <cfscript>

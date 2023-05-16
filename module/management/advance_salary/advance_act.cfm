@@ -17,7 +17,7 @@
                 )
                 VALUES 
                 (
-                    #form.user_id#,
+                    <cfqueryparam cfsqltype="integer" value="#form.user_id#">,
                     #form.advance_amt#,
                     #form.month#,
                     #year(now())#,
