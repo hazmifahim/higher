@@ -10,13 +10,13 @@
         <cfif isDefined("chk_existing.recordCount") AND chk_existing.recordCount NEQ 0>
 
             Swal.fire({
-                title: 'Success',
+                title: 'Alert!',
                 text: 'Payroll Has Already Exists',
-                icon: 'success',
+                icon: 'warning',
                 confirmButtonText: 'Okay'
              }).then((result) => {
           
-                BootstrapDialog.closeAll();
+                BootstrapDialog.closeTop();
           
                 if (typeof reload_payroll_record_list == 'function')
                       {
@@ -54,6 +54,14 @@
                     <cfset employer_epf = 0.0>
     
                 </cfif>
+
+                <cfquery name="get_advance" datasource="higher">
+                    SELECT ifnull(sum(advance_amount),0) AS total_advance 
+                    FROM `advance_salary`
+                    WHERE `user_id` = #get_user.id#
+                    AND `month` = #form.month#
+                    AND `year` = #form.year#
+                </cfquery>
     
                 <cfquery name="get_socso" datasource="higher">
                     SELECT employee_contribution, employer_contribution FROM socso_rate
@@ -70,7 +78,7 @@
                 <cfset employee_eis = get_eis.employee_contribution>
                 <cfset employer_eis = get_eis.employer_contribution>
     
-                <cfset net_amount = gross_salary-employee_epf-employee_socso-employee_eis>
+                <cfset net_amount = gross_salary-employee_epf-employee_socso-employee_eis-get_advance.total_advance>
     
                 <cfquery name="insert_data" datasource="higher">
                     INSERT INTO `payslips`
@@ -86,7 +94,8 @@
                         employee_eis_amount,
                         employer_epf_amount,
                         employer_socso_amount,
-                        employer_eis_amount
+                        employer_eis_amount,
+                        total_advance
                     )
                     VALUES 
                     (
@@ -101,7 +110,8 @@
                         #employee_eis#,
                         #employer_epf#,
                         #employer_socso#,
-                        #employer_eis#
+                        #employer_eis#,
+                        #get_advance.total_advance#
                     )
                 </cfquery>
     

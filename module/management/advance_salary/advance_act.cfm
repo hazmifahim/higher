@@ -29,8 +29,8 @@
         </cfif>
 
         Swal.fire({
-            title: 'Advance Has Been Added',
-            text: 'Lets Go!',
+            title: 'Success',
+            text: 'Advance Has Been Added',
             icon: 'success',
             confirmButtonText: 'Okay'
          }).then((result) => {

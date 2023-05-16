@@ -300,6 +300,21 @@
 			</cfquery>     
 		</cfcatch>
 	</cftry>
+
+	<cftry>
+		<cfquery datasource="higher">
+			SELECT `total_advance` FROM `payslips`
+		</cfquery>
+		<cfcatch type="database">
+			<br>Auto generated
+			<br>ALTER TABLE `payslips` 
+			<br>ADD COLUMN `total_advance` DOUBLE(11,2) NULL
+			<cfquery datasource="higher">
+				ALTER TABLE `payslips` 
+				ADD COLUMN `total_advance` DOUBLE(11,2) NULL
+			</cfquery>     
+		</cfcatch>
+	</cftry>
 	
 	<br><br>End of checking
 

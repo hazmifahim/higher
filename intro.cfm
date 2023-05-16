@@ -78,7 +78,7 @@
                      <li>
                         <a href="##advance" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-money green_color"></i> <span>Advance</span></a>
                         <ul class="collapse list-unstyled" id="advance">
-                           <li><a style="cursor:pointer" id="advance_form" href="##">> <span>Advance Form</span></a></li>
+                        
                            <li><a style="cursor:pointer" id="advance_record" href="##">> <span>Advance Record</span></a></li>
                         </ul>
                      </li>
@@ -266,10 +266,6 @@
 
       $("##attendance_record").click(function(){
          loadContent("module/management/attendance/attendance_record.cfm");
-      });
-
-      $("##advance_form").click(function(){
-         loadContent("module/management/advance_salary/advance_list.cfm");
       });
 
       $("##advance_record").click(function(){
