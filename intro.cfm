@@ -61,7 +61,7 @@
                <div class="sidebar_blog_2">
                   <h4>General</h4>
                   <ul class="list-unstyled components">
-                     <li class="active"><a id="page_dashboard" href="##"><i class="fa fa-dashboard yellow_color"></i> <span>Dashboard</span></a></li>
+                     <li class="active"><a id="page_dashboard" href="##"><i class="fa fa-dashboard orange_color"></i> <span>Dashboard</span></a></li>
                      <li>
                         <a href="##management" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-folder-open green_color"></i> <span>Management</span></a>
                         <ul class="collapse list-unstyled" id="management">
@@ -69,14 +69,14 @@
                         </ul>
                      </li>
                      <li>
-                        <a href="##attendance" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users green_color"></i> <span>Attendance</span></a>
+                        <a href="##attendance" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users brown_color"></i> <span>Attendance</span></a>
                         <ul class="collapse list-unstyled" id="attendance">
                            <li><a style="cursor:pointer" id="attendance_form" href="##">> <span>Attendance Form</span></a></li>
                            <li><a style="cursor:pointer" id="attendance_record" href="##">> <span>Attendance Record</span></a></li>
                         </ul>
                      </li>
                      <li>
-                        <a href="##advance" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-money green_color"></i> <span>Advance</span></a>
+                        <a href="##advance" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-money yellow_color"></i> <span>Advance</span></a>
                         <ul class="collapse list-unstyled" id="advance">
                         
                            <li><a style="cursor:pointer" id="advance_record" href="##">> <span>Advance Record</span></a></li>
@@ -115,12 +115,6 @@
                         <ul class="collapse list-unstyled" id="driver_sec">
                            <li><a id="" href="##">> <span>Driver's Profile</span></a></li>
                            <li><a id="" href="##">> <span>Driver's Task</span></a></li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="##locations" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-map-marker brown_color"></i> <span>Location</span></a>
-                        <ul class="collapse list-unstyled" id="locations">
-                           <li><a id="flight_form" href="##">> <span>Location List</span></a></li>
                         </ul>
                      </li>
                   </ul>
