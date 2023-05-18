@@ -2,7 +2,6 @@
 
 	<cfparam name="format" default="PDF">
 	<cfset lib.xCubeReport3 = createObject("component", "higher.module.print.xCubeReport3") />
-    
     <cfset rpt_dttm = 'Cetakan Pada #dateTimeFormat(now(),"dd/mm/yyyy hh:nn tt")#'>
 
     <cfquery name = "getData" datasource = "higher">
