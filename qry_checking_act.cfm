@@ -315,6 +315,48 @@
 			</cfquery>     
 		</cfcatch>
 	</cftry>
+
+	<cftry>
+		<cfquery datasource="higher">
+			SELECT `id` FROM `setting`
+		</cfquery>
+		<cfcatch type="database">
+			<br>Auto generated
+			<br>CREATE TABLE `setting`
+			<cfquery datasource="higher">
+				CREATE TABLE `setting` (
+					`id` int NOT NULL AUTO_INCREMENT,
+					`setting_name` char(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Nama Setting',
+					`filename` varchar(700) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Masukkan nama file',
+					`value` char(10) DEFAULT NULL,
+					`description` varchar(150) DEFAULT NULL,
+					PRIMARY KEY (`ID`),
+					KEY `setting_name` (`setting_name`)
+				) ENGINE=InnoDB
+			</cfquery>     
+		</cfcatch>
+	</cftry>
+
+	<cfquery datasource="higher" name="chk_LOGO_PATH_PRINTING">
+		SELECT id FROM setting WHERE setting_name = 'LOGO_PATH_PRINTING'
+	  </cfquery>
+	  <cfif chk_LOGO_PATH_PRINTING.recordcount EQ 0>
+		<br>Auto generated
+		<br>INSERT INTO `setting` (`type`, `setting_name`, `description`)
+		<br>VALUES ( 'CTRL', 'LOGO_PATH_PRINTING', 'Path untuk logo dalam printing' );
+		<cfquery datasource="higher">
+		  INSERT INTO `setting` 
+		  ( 
+			`setting_name`, 
+			`description`
+		  ) 
+		  VALUES 
+		  (
+			'LOGO_PATH_PRINTING', 
+			'Path untuk logo dalam printing'
+		  );
+		</cfquery>
+	  </cfif>
 	
 	<br><br>End of checking
 

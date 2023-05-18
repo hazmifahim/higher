@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pemeriksaan Aset Tak Alih" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="511" leftMargin="42" rightMargin="42" topMargin="28" bottomMargin="28" uuid="9e386e0c-a9e9-4062-85fd-23db9a7cc6a5">
-	<property name="ireport.zoom" value="1.210000000000012"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="2.5937424601000276"/>
+	<property name="ireport.x" value="223"/>
+	<property name="ireport.y" value="124"/>
+	<parameter name="logo_path" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[]]>
 	</queryString>
@@ -22,38 +23,38 @@
 	<pageHeader>
 		<band height="214">
 			<staticText>
-				<reportElement x="144" y="26" width="160" height="19" uuid="9e3ee18c-1c95-49f2-978c-20e392394f5a"/>
+				<reportElement x="176" y="31" width="160" height="19" uuid="9e3ee18c-1c95-49f2-978c-20e392394f5a"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[HIGHFLY]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="144" y="45" width="160" height="12" uuid="9b4080ad-dc70-4ce8-9da3-ac9bde374f21"/>
+				<reportElement x="176" y="50" width="160" height="12" uuid="9b4080ad-dc70-4ce8-9da3-ac9bde374f21"/>
 				<textElement>
-					<font size="9" isBold="false"/>
+					<font size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Company No: 0000167547-T]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="144" y="57" width="210" height="26" uuid="9b620353-1f19-4c36-a7bf-528f47cfcbe0"/>
+				<reportElement x="176" y="62" width="210" height="23" uuid="9b620353-1f19-4c36-a7bf-528f47cfcbe0"/>
 				<textElement>
-					<font size="9" isBold="false"/>
+					<font size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[No. 12-1, Blok B, Lorong Plaza Kingfisher 2,
 Plaza Kingfisher, 88450 Kota Kinabalu, SABAH]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="144" y="83" width="160" height="12" uuid="685acac4-b72a-4f9c-b404-03ea38e4ed17"/>
+				<reportElement x="176" y="85" width="160" height="11" uuid="685acac4-b72a-4f9c-b404-03ea38e4ed17"/>
 				<textElement>
-					<font size="9" isBold="false"/>
+					<font size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Tel : 0198608700 , 0198303230]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="144" y="95" width="160" height="12" uuid="84e9b1de-3dc4-422e-be69-deb1b193d092"/>
+				<reportElement x="176" y="96" width="160" height="11" uuid="84e9b1de-3dc4-422e-be69-deb1b193d092"/>
 				<textElement>
-					<font size="9" isBold="false"/>
+					<font size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Email : highflyborneo@gmail.com]]></text>
 			</staticText>
@@ -177,8 +178,8 @@ Plaza Kingfisher, 88450 Kota Kinabalu, SABAH]]></text>
 				<textFieldExpression><![CDATA[$F{month}+'/'+$F{year}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="FillFrame">
-				<reportElement x="2" y="30" width="134" height="77" uuid="136750a0-83d0-4cdc-8f6a-60a3a4fb6582"/>
-				<imageExpression><![CDATA["C:\\Application\\higher\\images\\logo\\logo_comp.png"]]></imageExpression>
+				<reportElement x="0" y="22" width="164" height="85" uuid="136750a0-83d0-4cdc-8f6a-60a3a4fb6582"/>
+				<imageExpression><![CDATA[$P{logo_path} + "higher\\images\\logo\\logo_comp.png"]]></imageExpression>
 			</image>
 		</band>
 	</pageHeader>
