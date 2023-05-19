@@ -176,8 +176,8 @@ Plaza Kingfisher, 88450 Kota Kinabalu, SABAH]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{month}+'/'+$F{year}]]></textFieldExpression>
 			</textField>
-			<image scaleImage="FillFrame">
-				<reportElement x="2" y="30" width="134" height="77" uuid="136750a0-83d0-4cdc-8f6a-60a3a4fb6582"/>
+			<image>
+				<reportElement x="16" y="45" width="115" height="50" uuid="abd45b53-caff-4b33-a9e5-93b3c491b536"/>
 				<imageExpression><![CDATA["C:\\Application\\higher\\images\\logo\\logo_comp.png"]]></imageExpression>
 			</image>
 		</band>
