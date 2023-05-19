@@ -21,7 +21,7 @@
                   <div class="row">
                      <label class="col-sm-4 col-form-label">E-Mail </label>
                      <div class="col-sm-8">
-                        <input type="text" id="" name="" class="form-control">
+                        <input type="text" id="email" name="email" class="form-control">
                      </div>
                   </div>
                </div>
@@ -29,7 +29,7 @@
                   <div class="row">
                      <label class="col-sm-4 col-form-label">I.C Number </label>
                      <div class="col-sm-8">
-                        <input type="text" id="ic_num" name="ic_num" class="form-control">
+                        <input type="text" id="ic_no" name="ic_no" class="form-control">
                      </div>
                   </div>
                </div>
@@ -37,7 +37,7 @@
                   <div class="row">
                      <label class="col-sm-4 col-form-label">Gender </label>
                      <div class="col-sm-8">
-                        <select class="form-control" id="nationality" name="nationality">
+                        <select class="form-control" id="sex" name="sex">
                            <option value="">Please choose...</option>
                            <option value="1">Male</option>
                            <option value="2">Female</option>
@@ -49,7 +49,7 @@
                   <div class="row">
                      <label class="col-sm-4 col-form-label">Date Of Birth</label>
                      <div class="col-sm-8">
-                        <input type="text" id="dob" name="dob" class="form-control" value="#dateformat(NOW(),'dd/mm/yyyy')#">
+                        <input type="text" id="birthdate" name="birthdate" class="form-control" value="#dateformat(NOW(),'dd/mm/yyyy')#">
                      </div>
                   </div>
                </div>
@@ -57,7 +57,7 @@
                   <div class="row">
                      <label class="col-sm-4 col-form-label">Worker Status </label>
                      <div class="col-sm-8">
-                        <select class="form-control" id="nationality" name="nationality">
+                        <select class="form-control" id="worker_status" name="worker_status">
                            <option value="">Please choose...</option>
                            <option value="1">Ordinary</option>
                            <option value="2">Extraordinary</option>
@@ -81,7 +81,7 @@
                   <div class="row">
                      <label class="col-sm-4 col-form-label">Marital Status </label>
                      <div class="col-sm-8">
-                        <select class="form-control" id="nationality" name="nationality">
+                        <select class="form-control" id="married" name="married">
                            <option value="">Please choose...</option>
                            <option value="1">Single</option>
                            <option value="2">Married</option>
@@ -100,7 +100,7 @@
                               <label for="check_1"> Not Disabled</label><br>
                            </div>
                            <div class="col-sm-6">
-                              <input type="radio" id="check_2" name="disability_status" value="">
+                              <input type="radio" id="check_2" name="disability_status" value="1">
                               <label for="check_2"> Disabled</label><br>
                            </div>
                         </div>

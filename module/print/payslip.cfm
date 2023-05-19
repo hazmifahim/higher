@@ -4,6 +4,17 @@
 	<cfset lib.xCubeReport3 = createObject("component", "higher.module.print.xCubeReport3") />
     <cfset rpt_dttm = 'Cetakan Pada #dateTimeFormat(now(),"dd/mm/yyyy hh:nn tt")#'>
 
+
+    <!--- LOGO SETTING --->
+    <cfquery name="logo_setting" datasource="higher">
+        SELECT 
+        `setting_name`,
+        `value`
+        FROM `setting`
+        WHERE `setting_name` = 'LOGO_PATH_PRINTING'
+    </cfquery>
+    <!--- LOGO SETTING --->
+
     <cfquery name = "getData" datasource = "higher">
        SELECT
             t1.*,
@@ -16,6 +27,8 @@
         LIMIT 1
     </cfquery>
 
+
+
     <cfscript>
     	cfg = {
             format = format,
@@ -26,7 +39,8 @@
             paged = format EQ 'html',
             dataProvider = 'data',
             fullname = getData.fullname,
-            jasperPath = 'payslip.jasper'
+            jasperPath = 'payslip.jasper',
+            logo_path = logo_setting.value
         };
 
         StructAppend(conf, url);
