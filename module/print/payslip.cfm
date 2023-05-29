@@ -8,7 +8,7 @@
     <!--- LOGO SETTING --->
     <cfquery name="logo_setting" datasource="higher">
         SELECT 
-        `setting_name`,
+        `filename`,
         `value`
         FROM `setting`
         WHERE `setting_name` = 'LOGO_PATH_PRINTING'
@@ -18,7 +18,8 @@
     <cfquery name = "getData" datasource = "higher">
        SELECT
             t1.*,
-            t2.`fullname`
+            t2.`fullname`,
+            t2.`ic_no`
         FROM
             `payslips` t1
         INNER JOIN `users` t2
@@ -40,7 +41,7 @@
             dataProvider = 'data',
             fullname = getData.fullname,
             jasperPath = 'payslip.jasper',
-            logo_path = logo_setting.value
+            logo_path = logo_setting.filename
         };
 
         StructAppend(conf, url);

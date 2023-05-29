@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pemeriksaan Aset Tak Alih" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="511" leftMargin="42" rightMargin="42" topMargin="28" bottomMargin="28" uuid="9e386e0c-a9e9-4062-85fd-23db9a7cc6a5">
-	<property name="ireport.zoom" value="2.5937424601000276"/>
-	<property name="ireport.x" value="223"/>
-	<property name="ireport.y" value="124"/>
+	<property name="ireport.zoom" value="1.6105100000000165"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="590"/>
 	<parameter name="logo_path" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[]]>
@@ -20,6 +20,7 @@
 	<field name="month" class="java.lang.String"/>
 	<field name="year" class="java.lang.String"/>
 	<field name="created_date" class="java.util.Date"/>
+	<field name="ic_no" class="java.lang.String"/>
 	<pageHeader>
 		<band height="214">
 			<staticText>
@@ -181,6 +182,14 @@ Plaza Kingfisher, 88450 Kota Kinabalu, SABAH]]></text>
 				<reportElement x="0" y="22" width="164" height="85" uuid="136750a0-83d0-4cdc-8f6a-60a3a4fb6582"/>
 				<imageExpression><![CDATA[$P{logo_path} + "higher\\images\\logo\\logo_comp.png"]]></imageExpression>
 			</image>
+			<textField>
+				<reportElement x="91" y="191" width="194" height="15" uuid="3eb040b1-74f6-44b5-9aee-77afe4c62f7b"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ic_no}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -458,6 +467,14 @@ Plaza Kingfisher, 88450 Kota Kinabalu, SABAH]]></text>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{employer_eis_amount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="74" y="427" width="142" height="20" uuid="a5992520-1f93-4641-b5f7-1880f62dbd6b"/>
+				<box leftPadding="2"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gross_amount}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>

@@ -58,8 +58,12 @@
 		`fullname`,
 		`name`,
 		`ic_no`,
-		`sex`,
-		`mobile`
+		`mobile`,
+		CASE
+           WHEN sex = 1 THEN 'MALE'
+           WHEN sex = 2 THEN 'FEMALE'
+           ELSE ''
+       END AS sex
 	FROM `users`
 
 	#PreserveSingleQuotes(queryWhere)# 

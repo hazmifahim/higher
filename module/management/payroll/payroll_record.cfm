@@ -57,9 +57,9 @@
 							<th class="text-center">Month</th>
 							<th class="text-center">Year</th>
 							<th class="text-center">Name</th>
-							<th class="text-center">Total Salary (RM)</th>
-							<th class="text-center">Payment Status</th>
-							<th class="text-center">Payment Date</th>
+							<th class="text-center">Net Income (RM)</th>
+							<!--- <th class="text-center">Payment Status</th>
+							<th class="text-center">Payment Date</th> --->
 							<th class="text-center"></th>
 						</tr>
 						
@@ -131,41 +131,41 @@
 					return $.fn.dataTable.render.number(',', '.', 2).display(data);
 				}
 			},
+			// {
+			// 	"aTargets": [ 5 ],
+			// 	"sClass": "text-center",
+			// 	render: function (data,type,full)
+			// 	{
+			// 		if (data == '' || data == null)
+			// 		{
+			// 			return '<span class="text-danger">UNPAID</span>'
+			// 		} else {
+			// 			return '<span class="text-success">PAID</span>'
+			// 		}
+			// 	}
+			// },
+			// {
+			// 	"aTargets": [ 6 ],
+			// 	"sClass": "text-center",
+			// 	"mRender": function ( data, type, row ) {
+			// 		return moment(data).format("DD/MM/YYYY");
+			// 	}
+			// },
 			{
-				"aTargets": [ 5 ],
-				"sClass": "text-center",
-				render: function (data,type,full)
-				{
-					if (data == '' || data == null)
-					{
-						return '<span class="text-danger">UNPAID</span>'
-					} else {
-						return '<span class="text-success">PAID</span>'
-					}
-				}
-			},
-			{
-				"aTargets": [ 6 ],
-				"sClass": "text-center",
-				"mRender": function ( data, type, row ) {
-					return moment(data).format("DD/MM/YYYY");
-				}
-			},
-			{
-				"aTargets": [ 7 ],
+				"aTargets": [ 5],
 				"sClass": "text-center",
 				render: function (data, type, full) {
 
 					var info_btn = '<a type="button" title="Kemaskini" onclick="open_modal(\'info\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-pencil"></i></a>';
-					var print_btn = '<a type="button" title="Kemaskini" onclick="open_modal(\'info\','+full[0]+');" href="##" class="circle-btn circle-btn-warning"><i class="fa fa-print"></i></a>';
-					return info_btn+ ' ' +print_btn;
+					var print_btn = '<a type="button" title="Print Payslip" onclick="print_payslip(\'payslip\','+full[0]+');" href="##" class="circle-btn circle-btn-danger"><i class="fa fa-print"></i></a>';
+					return print_btn;
 				}
 			}
 		]
 	});
 
 	reload_#table_id# = function() {
-      #table_id#.clearPipeline();
+      	#table_id#.clearPipeline();
 		#table_id#.ajax.reload(null, false);
     }
 
@@ -182,7 +182,8 @@
 			closable: true,
 			closeByBackdrop: true,
 			closeByKeyboard: false,
-			buttons: [{
+			buttons: [
+				{
 					label: 'Close',
 					action: function(dialogItself){
 						dialogItself.close();
@@ -202,6 +203,36 @@
 						},
 						function(){ // Required Callback Function
 						}, "script");
+					}
+				}
+			]
+		});
+	}
+
+	function print_payslip(process,data) 
+	{
+		if(process == 'payslip')
+			{
+				let param = $.param({
+					id: data
+				});
+
+				var refh = '/higher/module/print/payslip.cfm?'+param;
+				var encodedRef = encodeURIComponent(refh);
+			}
+
+		BootstrapDialog.show({
+			size: BootstrapDialog.SIZE_WIDE,
+			type: 	BootstrapDialog.TYPE_PRIMARY,
+			title: 'Payslip For',
+			message: '<div><iframe width="100%" height="800px" frameborder="0" scrolling="no" src="plugin/pdfjs/web/goviewer.cfm?file='+encodedRef+'"></iframe></div>',
+			closable: true,
+			closeByBackdrop: true,
+			closeByKeyboard: false,
+			buttons: [{
+					label: 'Close',
+					action: function(dialogItself){
+						dialogItself.close();
 					}
 				}]
 			});

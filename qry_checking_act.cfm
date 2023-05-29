@@ -357,6 +357,21 @@
 		  );
 		</cfquery>
 	  </cfif>
+
+	  <cftry>
+		<cfquery datasource="higher">
+			SELECT `pcb` FROM `users`
+		</cfquery>
+		<cfcatch type="database">
+			<br>Auto generated
+			<br>ALTER TABLE `users` 
+			<br>ADD COLUMN `pcb` DOUBLE(11,2) NULL
+			<cfquery datasource="higher">
+				ALTER TABLE `users` 
+				ADD COLUMN `pcb` DOUBLE(11,2) NULL
+			</cfquery>     
+		</cfcatch>
+	</cftry>
 	
 	<br><br>End of checking
 
