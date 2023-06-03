@@ -48,8 +48,6 @@
 							<th class="text-center" style="width:5%">No.</th>
 							<th class="text-center">Month / Year</th>
 							<th class="text-center">Total Payment (RM)</th>
-							<th class="text-center">Payment Status</th>
-							<th class="text-center">Payment Date</th>
 							<th class="text-center"></th>
 						</tr>
 						
@@ -120,27 +118,7 @@
 				}
 			},
 			{
-				"aTargets": [ 3 ],
-				"sClass": "text-center",
-				render: function (data,type,full)
-				{
-					if (data == '' || data == null)
-					{
-						return '<span class="text-danger">UNPAID</span>'
-					} else {
-						return '<span class="text-success">PAID</span>'
-					}
-				}
-			},
-			{
-				"aTargets": [ 4 ],
-				"sClass": "text-center",
-				"mRender": function ( data, type, row ) {
-				return moment(data).format("DD/MM/YYYY");
-				}
-			},
-			{
-				"aTargets": [5],
+				"aTargets": [3],
 				"sClass": "text-center",
 				render: function (data, type, full) {
 
