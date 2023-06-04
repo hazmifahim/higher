@@ -372,6 +372,69 @@
 			</cfquery>     
 		</cfcatch>
 	</cftry>
+
+	<cftry>
+		<cfquery datasource="higher">
+			SELECT `pcb` FROM `users`
+		</cfquery>
+		<cfcatch type="database">
+			<br>Auto generated
+			<br>ALTER TABLE `users` 
+			<br>ADD COLUMN `pcb` DOUBLE(11,2) NULL
+			<cfquery datasource="higher">
+				ALTER TABLE `users` 
+				ADD COLUMN `pcb` DOUBLE(11,2) NULL
+			</cfquery>     
+		</cfcatch>
+	</cftry>
+
+	<cftry>
+		<cfquery datasource="higher">
+			SELECT `id` FROM `pilot_task`
+		</cfquery>
+		<cfcatch type="database">
+			<br>Auto generated
+			<br>CREATE TABLE `pilot_task`
+			<cfquery datasource="higher">
+				CREATE TABLE `pilot_task` (
+					`id` int NOT NULL AUTO_INCREMENT,
+					`task_dt` datetime DEFAULT NULL,
+					`pilot_id` int DEFAULT NULL,
+					`flight_qty` varchar(50) DEFAULT NULL,
+					PRIMARY KEY (`id`)
+				) ENGINE=InnoDB
+			</cfquery>     
+		</cfcatch>
+	</cftry>
+
+	<cftry>
+		<cfquery datasource="higher">
+			SELECT `id` FROM `pilot_task_flight`
+		</cfquery>
+		<cfcatch type="database">
+			<br>Auto generated
+			<br>CREATE TABLE `pilot_task_flight`
+			<cfquery datasource="higher">
+				CREATE TABLE `pilot_task_flight` (
+					`id` int NOT NULL AUTO_INCREMENT,
+					`task_id` int DEFAULT NULL,
+					`flight_dt` datetime DEFAULT NULL,
+					`ref_num` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+					`passenger_num` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+					`pilot_id` int DEFAULT NULL,
+					`camera` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+					`lt_status_id` int DEFAULT NULL,
+					`created_id` int DEFAULT NULL,
+					`created_dt` datetime DEFAULT NULL,
+					`updated_id` int DEFAULT NULL,
+					`updated_dt` datetime DEFAULT NULL,
+					`deleted_id` int DEFAULT NULL,
+					`deleted_dt` datetime DEFAULT NULL,
+					PRIMARY KEY (`id`)
+				) ENGINE=InnoDB
+			</cfquery>     
+		</cfcatch>
+	</cftry>
 	
 	<br><br>End of checking
 

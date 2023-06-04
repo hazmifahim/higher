@@ -107,7 +107,7 @@
                         <a href="##pilot_sec" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-secret orange_color"></i> <span>Pilot Section</span></a>
                         <ul class="collapse list-unstyled" id="pilot_sec">
                            <li><a id="pilot_list" href="##">> <span>Pilot's Profile</span></a></li>
-                           <li><a id="" href="##">> <span>Pilot's Task</span></a></li>
+                           <li><a id="pilot_task" href="##">> <span>Pilot's Task</span></a></li>
                         </ul>
                      </li>
                      <li>
@@ -246,8 +246,8 @@
          loadContent("flight_form.cfm");
       });
 
-      $("##pilot_list").click(function(){
-         loadContent("pilot_list.cfm");
+      $("##pilot_task").click(function(){
+         loadContent("module/pilot/pilot_task_list.cfm");
       });
 
       $("##employee_area").click(function(){
