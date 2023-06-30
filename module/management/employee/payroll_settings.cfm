@@ -7,17 +7,17 @@
                     <div class="row mb-space">
                         <div class="col-sm-6">
                             <div class="row">
-                                <label class="col-sm-4 col-form-label">Username </label>
+                                <label for="username" class="col-sm-4 col-form-label">Username </label>
                                 <div class="col-sm-8">
-                                    <input type="text" id="username" name="username" class="form-control">
+                                    <input type="text" id="username" name="username" class="form-control" autocomplete="on">
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
-                                <label class="col-sm-4 col-form-label">Password</label>
+                                <label for="password" class="col-sm-4 col-form-label">Password</label>
                                 <div class="col-sm-8">
-                                    <input type="password" id="password" name="password" class="form-control">
+                                    <input type="password" id="password" name="password" class="form-control" autocomplete="off">
                                 </div>
                             </div>
                         </div>
