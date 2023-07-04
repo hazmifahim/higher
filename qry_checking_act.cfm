@@ -435,6 +435,58 @@
 			</cfquery>     
 		</cfcatch>
 	</cftry>
+
+	<cftry>
+		<cfquery datasource="higher">
+			SELECT `id` FROM `driver_log`
+		</cfquery>
+		<cfcatch type="database">
+			<br>Auto generated
+			<br>CREATE TABLE `driver_log`
+			<cfquery datasource="higher">
+				CREATE TABLE `driver_log` (
+					`id` int NOT NULL AUTO_INCREMENT,
+					`log_dt` datetime DEFAULT NULL,
+					`driver_id` int DEFAULT NULL,
+					`trip_qty` varchar(50) DEFAULT NULL,
+					PRIMARY KEY (`id`)
+				) ENGINE=InnoDB
+			</cfquery>     
+		</cfcatch>
+	</cftry>
+
+	<cftry>
+		<cfquery datasource="higher">
+			SELECT `id` FROM `driver_log_trip`
+		</cfquery>
+		<cfcatch type="database">
+			<br>Auto generated
+			<br>CREATE TABLE `driver_log_trip`
+			<cfquery datasource="higher">
+				CREATE TABLE `driver_log_trip` (
+					`id` int NOT NULL AUTO_INCREMENT,
+					`log_id` int DEFAULT NULL,
+					`trip_dt` datetime DEFAULT NULL,
+					`ref_num` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+					`driver_id` int DEFAULT NULL,
+					`from` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+					`to` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+					`trip_time` datetime DEFAULT NULL,
+					`authorize_id` int DEFAULT NULL,
+					`authorize_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+					`trip_remark_id` int DEFAULT NULL,
+					`lt_status_id` int DEFAULT NULL,
+					`created_id` int DEFAULT NULL,
+					`created_dt` datetime DEFAULT NULL,
+					`updated_id` int DEFAULT NULL,
+					`updated_dt` datetime DEFAULT NULL,
+					`deleted_id` int DEFAULT NULL,
+					`deleted_dt` datetime DEFAULT NULL,
+					PRIMARY KEY (`id`)
+				) ENGINE=InnoDB
+			</cfquery>     
+		</cfcatch>
+	</cftry>
 	
 	<br><br>End of checking
 
