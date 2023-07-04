@@ -47,7 +47,7 @@
    <cfset id = ''>
    <cfset flight_dt = url.task_dt>
    <cfset pilot_id = pilot_data.id>
-   <cfset ref_num = '#pilot_data.name#/#dateformat(url.task_dt,'mmddyy')#/F#flight_cnt#'>
+   <cfset ref_num = 'PLT-#UCASE(pilot_data.name)#/#dateformat(url.task_dt,'mmddyy')#/F#flight_cnt#'>
    <cfset passenger_num = ''>
    <cfset camera = ''>
    <cfset action = 'register'>

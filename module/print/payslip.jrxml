@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pemeriksaan Aset Tak Alih" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="511" leftMargin="42" rightMargin="42" topMargin="28" bottomMargin="28" uuid="9e386e0c-a9e9-4062-85fd-23db9a7cc6a5">
 	<property name="ireport.zoom" value="1.6105100000000165"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="590"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="logo_path" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[]]>
@@ -273,7 +273,7 @@ Plaza Kingfisher, 88450 Kota Kinabalu, SABAH]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{gross_amount}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.00;(###0.00)">
+			<textField pattern="###0.00;(###0.00)" isBlankWhenNull="true">
 				<reportElement x="374" y="142" width="100" height="20" uuid="0ac6e23b-b2e9-44b7-a94a-dffb16600a01"/>
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>

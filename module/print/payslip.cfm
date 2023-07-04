@@ -41,7 +41,7 @@
             dataProvider = 'data',
             fullname = getData.fullname,
             jasperPath = 'payslip.jasper',
-            logo_path = logo_setting.filename
+            logo_path = logo_setting.value
         };
 
         StructAppend(conf, url);

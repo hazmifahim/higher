@@ -114,7 +114,7 @@
                         <a href="##driver_sec" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-car purple_color"></i> <span>Driver Section</span></a>
                         <ul class="collapse list-unstyled" id="driver_sec">
                            <li><a id="" href="##">> <span>Driver's Profile</span></a></li>
-                           <li><a id="" href="##">> <span>Driver's Task</span></a></li>
+                           <li><a id="driver_log" href="##">> <span>Driver's Log</span></a></li>
                         </ul>
                      </li>
                   </ul>
@@ -248,6 +248,10 @@
 
       $("##pilot_task").click(function(){
          loadContent("module/pilot/pilot_task_list.cfm");
+      });
+
+      $("##driver_log").click(function(){
+         loadContent("module/driver/driver_log_list.cfm");
       });
 
       $("##employee_area").click(function(){
