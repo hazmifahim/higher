@@ -487,6 +487,88 @@
 			</cfquery>     
 		</cfcatch>
 	</cftry>
+
+	<cftry>
+		<cfquery datasource="higher">
+			SELECT `id` FROM `lt_trip_remark`
+		</cfquery>
+		<cfcatch type="database">
+			<br>Auto generated
+			<br>CREATE TABLE `lt_trip_remark`
+			<cfquery datasource="higher">
+				CREATE TABLE `lt_trip_remark` (
+					`id` int NOT NULL AUTO_INCREMENT,
+					`code` char(10) DEFAULT NULL,
+					`description` varchar(150) DEFAULT NULL,
+					PRIMARY KEY (`id`)
+				) ENGINE=InnoDB
+			</cfquery>     
+		</cfcatch>
+	</cftry>
+
+	<cfquery datasource="higher" name="chk_insert_lt_trip_remark">
+		SELECT id FROM lt_trip_remark WHERE code = 'A'
+	  </cfquery>
+	  <cfif chk_insert_lt_trip_remark.recordcount EQ 0>
+		<br>Auto generated
+		<br>INSERT INTO `lt_trip_remark` 
+		<cfquery datasource="higher">
+		  INSERT INTO `lt_trip_remark` 
+		  ( 
+			`code`, 
+			`description`
+		  ) 
+		  VALUES 
+		  (
+			'A', 
+			'KOMPLEKS > LZ3/T02 > KOMPLEKS'
+		  );
+
+		  INSERT INTO `lt_trip_remark` 
+		  ( 
+			`code`, 
+			`description`
+		  ) 
+		  VALUES 
+		  (
+			'B', 
+			'KOMPLEKS > TAKEOFF/LZ3 > TAKEOFF/LZ1 > KOMPLEKS'
+		  );
+
+		  INSERT INTO `lt_trip_remark` 
+		  ( 
+			`code`, 
+			`description`
+		  ) 
+		  VALUES 
+		  (
+			'C', 
+			'KOMPLEKS > LZ2 > KOMPLEKS'
+		  );
+
+		  INSERT INTO `lt_trip_remark` 
+		  ( 
+			`code`, 
+			`description`
+		  ) 
+		  VALUES 
+		  (
+			'D', 
+			'LZ1 > TAKEOFF'
+		  );
+
+		  INSERT INTO `lt_trip_remark` 
+		  ( 
+			`code`, 
+			`description`
+		  ) 
+		  VALUES 
+		  (
+			'E', 
+			'LZ2 > TAKEOFF'
+		  );
+		</cfquery>
+	  </cfif>
 	
 	<br><br>End of checking
 
