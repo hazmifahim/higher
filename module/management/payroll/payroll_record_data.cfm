@@ -11,7 +11,7 @@
 <cfparam name="form['order[0][dir]']" default='asc' type="string">
 <cfset start= Int(Val(FORM.start))>
 <cfset length= Int(Val(FORM.length))>
-<cfset search= Trim(form['search[value]'])>
+<cfset search= Trim(URL['search[value]'])>
 
 <cfif structKeyExists(FORM,'order[0][column]')>
 	<cfset iSortCol_0= Int(Val(FORM['order[0][column]']))>
@@ -55,9 +55,10 @@
 <cfquery name="queryResult" datasource="#datasource#">
 	SELECT t1.*, t2.`fullname` FROM `payslips` t1 
 	INNER JOIN `users` t2 ON t2.`id` = t1.`user_id`
+	#PreserveSingleQuotes(queryWhere)# 
 	ORDER BY t1.`created_date` DESC
 
-	#PreserveSingleQuotes(queryWhere)# 
+	
 </cfquery>
 
 <cfquery name="querycount" datasource="#datasource#">

@@ -11,7 +11,7 @@
 <cfparam name="form['order[0][dir]']" default='asc' type="string">
 <cfset start= Int(Val(FORM.start))>
 <cfset length= Int(Val(FORM.length))>
-<cfset search= Trim(form['search[value]'])>
+<cfset search= Trim(URL['search[value]'])>
 
 <cfif structKeyExists(FORM,'order[0][column]')>
 	<cfset iSortCol_0= Int(Val(FORM['order[0][column]']))>
@@ -65,14 +65,14 @@
            ELSE ''
        END AS sex
 	FROM `users`
-
+	WHERE 0=0
 	#PreserveSingleQuotes(queryWhere)# 
 </cfquery>
 
 <cfquery name="querycount" datasource="#datasource#">
 	SELECT COUNT(id) AS total 
 	FROM `users`
-
+	WHERE 0=0
 	#PreserveSingleQuotes(queryWhere)#
 </cfquery>
 <cfsavecontent variable="datatablesjson"><cfloop from="1" to="#queryResult.RecordCount#" index="counter"><cfoutput>[<cfloop from="1"  to="#noOfTableFields#" index="innerCounter"><cfif tableFields[innerCounter] EQ "start_date">"#JSStringFormat(dateformat(queryResult[tableFields[innerCounter]][counter],'yyyy/mm/dd'))#"<cfelse>"#replacenocase(JSStringFormat(queryResult[rereplace(tableFields[innerCounter],'"','','all')][counter]),"\'","'","all")#"</cfif><cfif innerCounter LT noOfTableFields>,</cfif></cfloop>]<cfif counter LT queryResult.RecordCount>,</cfif></cfoutput></cfloop></cfsavecontent>
