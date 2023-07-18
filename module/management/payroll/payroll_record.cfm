@@ -37,6 +37,7 @@
 
 <cfset table_id = 'payroll_record_list'>
 <cfset form_id = 'payroll_filter'>
+<cfset curr_month = month(now())>
 
 <div class="row mt-5">
 	<div class="col-sm-12">
@@ -47,7 +48,7 @@
 					<h2>Payroll Record</b></h2>
 				</div>
 				<div class="pull-right box-tools">
-				<div class="button_block mt-2"><button type="button" onclick="open_modal()"  class="btn cur-p btn-primary"><i class="fa fa-plus"></i> Generate Payroll</button></div>
+				<div class="button_block mt-2"><button type="button" onclick="open_modal_payroll()"  class="btn cur-p btn-primary"><i class="fa fa-plus"></i> Generate Payroll</button></div>
 					<!--- <a id="btn-reg-verification" onclick="open_modal()" class="btn btn-sm btn-primary" data-type="modal" title="Generate Payroll" data-title="Generate Payroll"><i class="fa fa-plus"></i> Generate Payroll</a> --->
 				</div>
 			</div>
@@ -74,18 +75,18 @@
 								<label class="col-sm-4 col-form-label">Month </label>
 								<div class="col-sm-8">
 									<select class="form-control" id="mnth" name="mnth">
-										<option value="1">January</option>
-										<option value="2">February</option>
-										<option value="3">March</option>
-										<option value="4">April</option>
-										<option value="5">May</option>
-										<option value="6">June</option>
-										<option value="7">July</option>
-										<option value="8">August</option>
-										<option value="9">September</option>
-										<option value="10">October</option>
-										<option value="11">November</option>
-										<option value="12">December</option>
+										<option value="1" <cfif isDefined("curr_month") AND curr_month EQ 1>selected</cfif>>January</option>
+								<option value="2" <cfif isDefined("curr_month") AND curr_month EQ 2>selected</cfif>>February</option>
+								<option value="3" <cfif isDefined("curr_month") AND curr_month EQ 3>selected</cfif>>March</option>
+								<option value="4" <cfif isDefined("curr_month") AND curr_month EQ 4>selected</cfif>>April</option>
+								<option value="5" <cfif isDefined("curr_month") AND curr_month EQ 5>selected</cfif>>May</option>
+								<option value="6" <cfif isDefined("curr_month") AND curr_month EQ 6>selected</cfif>>June</option>
+								<option value="7" <cfif isDefined("curr_month") AND curr_month EQ 7>selected</cfif>>July</option>
+								<option value="8" <cfif isDefined("curr_month") AND curr_month EQ 8>selected</cfif>>August</option>
+								<option value="9" <cfif isDefined("curr_month") AND curr_month EQ 9>selected</cfif>>September</option>
+								<option value="10" <cfif isDefined("curr_month") AND curr_month EQ 10>selected</cfif>>October</option>
+								<option value="11" <cfif isDefined("curr_month") AND curr_month EQ 11>selected</cfif>>November</option>
+								<option value="12" <cfif isDefined("curr_month") AND curr_month EQ 12>selected</cfif>>December</option>
 									</select>
 								</div>
 								</div>
