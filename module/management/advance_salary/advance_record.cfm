@@ -52,45 +52,47 @@
 				</div>
 			</div>
 			<form id="#form_id#" name="#form_id#">
-				<div class="col-sm-12">
-					<div class="row" style="padding:20px">
-						<div class="col-sm-5">
-							<cfparam name="yr" default="#YEAR(now())#">
-							<cfparam name="min_yr" default="#yr-5#">
-							<div class="row">
-							<label class="col-sm-4 col-form-label">Year </label>
-							<div class="col-sm-8">
-								<select name="yr" id="yr" class="form-control">
-									<cfloop from="#yr#" to="#min_yr#" index="i" step="-1">
-										<option value="#i#">#i#</option>
-									</cfloop>
-								</select>
+				<div class="row" style="padding:35px">
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-sm-5">
+								<cfparam name="yr" default="#YEAR(now())#">
+								<cfparam name="min_yr" default="#yr-5#">
+								<div class="row">
+								<label class="col-sm-4 col-form-label">Year </label>
+								<div class="col-sm-8">
+									<select name="yr" id="yr" class="form-control">
+										<cfloop from="#yr#" to="#min_yr#" index="i" step="-1">
+											<option value="#i#">#i#</option>
+										</cfloop>
+									</select>
+								</div>
+								</div>
 							</div>
+							<div class="col-sm-5">
+								<div class="row">
+								<label class="col-sm-4 col-form-label">Month </label>
+								<div class="col-sm-8">
+									<select class="form-control" id="mnth" name="mnth">
+										<option value="1">January</option>
+										<option value="2">February</option>
+										<option value="3">March</option>
+										<option value="4">April</option>
+										<option value="5">May</option>
+										<option value="6">June</option>
+										<option value="7">July</option>
+										<option value="8">August</option>
+										<option value="9">September</option>
+										<option value="10">October</option>
+										<option value="11">November</option>
+										<option value="12">December</option>
+									</select>
+								</div>
+								</div>
 							</div>
-						</div>
-						<div class="col-sm-5">
-							<div class="row">
-							<label class="col-sm-4 col-form-label">Month </label>
-							<div class="col-sm-8">
-								<select class="form-control" id="mnth" name="mnth">
-									<option value="1">January</option>
-									<option value="2">February</option>
-									<option value="3">March</option>
-									<option value="4">April</option>
-									<option value="5">May</option>
-									<option value="6">June</option>
-									<option value="7">July</option>
-									<option value="8">August</option>
-									<option value="9">September</option>
-									<option value="10">October</option>
-									<option value="11">November</option>
-									<option value="12">December</option>
-								</select>
+							<div class="col-sm-2">
+								<div class="button_block"><button type="button" id="search_filter_advance" class="btn cur-p btn-info float-right"><i class="fa fa-search"></i> Search</button></div>
 							</div>
-							</div>
-						</div>
-						<div class="col-sm-2">
-							<div class="button_block"><button type="button" id="search_filter_advance" class="btn cur-p btn-info float-right"><i class="fa fa-search"></i> Search</button></div>
 						</div>
 					</div>
 				</div>
