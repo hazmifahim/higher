@@ -32,7 +32,7 @@
     
             <cfloop query="get_user">
     
-                
+                <!--- monthly --->
                 <cfif isdefined("get_user.salary_method") AND get_user.salary_method EQ 1>
                 
                     <!--- gross salary --->
@@ -40,15 +40,52 @@
                 
                     <cfset employee_epf = gross_salary*0.11>
                     <cfset employer_epf = gross_salary*0.13>
-    
-                <cfelse>
-    
+
+                <!--- daily --->
+                <cfelseif isdefined("get_user.salary_method") AND get_user.salary_method EQ 2>
+
                     <cfquery name="get_attendance" datasource="higher">
                         SELECT COUNT(*) AS total FROM `attendance`
                         WHERE `user_id` = #get_user.id#
                     </cfquery>
     
                     <cfset gross_salary = get_attendance.total*get_user.salary_rate>
+    
+                    <cfset employee_epf = 0.0>
+                    <cfset employer_epf = 0.0>
+
+                <!--- per trip 3.pilot 4.driver--->
+                <cfelse>
+    
+                   <cfif get_user.role_ids EQ 3>
+                        <cfquery name="get_pilot_task" datasource="higher">
+                            SELECT
+                                SUM(trip_qty) AS total_trip
+                            FROM
+                                `pilot_task`
+                            WHERE pilot_id = #get_user.id#
+                            AND MONTH(task_dt) = #form.month#
+                            AND YEAR(task_dt) = #form.year#
+                        </cfquery>
+
+                        <cfset gross_salary = get_pilot_task.total_trip*get_user.salary_rate>
+                   <cfelse>
+
+
+                        <cfquery name="get_driver_task" datasource="higher">
+                            SELECT
+                                SUM(trip_qty) AS total_trip
+                            FROM
+                                `driver_log`
+                            WHERE driver_id = #get_user.id#
+                            AND MONTH(log_dt) = #form.month#
+                            AND YEAR(log_dt) = #form.year#
+                        </cfquery>
+
+                        <cfset gross_salary = get_driver_task.total_trip*get_user.salary_rate>
+                   </cfif>
+    
+                    
     
                     <cfset employee_epf = 0.0>
                     <cfset employer_epf = 0.0>
