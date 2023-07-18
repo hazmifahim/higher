@@ -31,15 +31,62 @@
 </style>
 
 <cfset table_id = 'attendance_recordss'>
+<cfset form_id = 'attendance_record_filter'>
+<cfset curr_month = month(now())>
 
 <div class="row mt-5">
 	<div class="col-md-12">
 	   <div class="white_shd full margin_bottom_30">
-		  <div class="full graph_head">
+		  <div class="full graph_head mb-5">
 			 <div class="heading1 margin_0">
 				<h2>Attendance Record</b></h2>
 			 </div>
 		  </div>
+		  <form id="#form_id#" name="#form_id#">
+			<div class="col-sm-12">
+				<div class="row" style="padding:20px">
+					<div class="col-sm-5">
+						<cfparam name="yr" default="#YEAR(now())#">
+						<cfparam name="min_yr" default="#yr-5#">
+						<div class="row">
+						<label class="col-sm-4 col-form-label">Year </label>
+						<div class="col-sm-8">
+							<select name="yr" id="yr" class="form-control">
+								<cfloop from="#yr#" to="#min_yr#" index="i" step="-1">
+									<option value="#i#">#i#</option>
+								</cfloop>
+							</select>
+						</div>
+						</div>
+					</div>
+					<div class="col-sm-5">
+						<div class="row">
+						<label class="col-sm-4 col-form-label">Month </label>
+						<div class="col-sm-8">
+							<select class="form-control" id="mnth" name="mnth">
+								<option value="1" <cfif isDefined("curr_month") AND curr_month EQ 1>selected</cfif>>January</option>
+								<option value="2" <cfif isDefined("curr_month") AND curr_month EQ 2>selected</cfif>>February</option>
+								<option value="3" <cfif isDefined("curr_month") AND curr_month EQ 3>selected</cfif>>March</option>
+								<option value="4" <cfif isDefined("curr_month") AND curr_month EQ 4>selected</cfif>>April</option>
+								<option value="5" <cfif isDefined("curr_month") AND curr_month EQ 5>selected</cfif>>May</option>
+								<option value="6" <cfif isDefined("curr_month") AND curr_month EQ 6>selected</cfif>>June</option>
+								<option value="7" <cfif isDefined("curr_month") AND curr_month EQ 7>selected</cfif>>July</option>
+								<option value="8" <cfif isDefined("curr_month") AND curr_month EQ 8>selected</cfif>>August</option>
+								<option value="9" <cfif isDefined("curr_month") AND curr_month EQ 9>selected</cfif>>September</option>
+								<option value="10" <cfif isDefined("curr_month") AND curr_month EQ 10>selected</cfif>>October</option>
+								<option value="11" <cfif isDefined("curr_month") AND curr_month EQ 11>selected</cfif>>November</option>
+								<option value="12" <cfif isDefined("curr_month") AND curr_month EQ 12>selected</cfif>>December</option>
+							</select>
+						</div>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="button_block"><button type="button" id="search_filter_attendance" class="btn cur-p btn-info float-right"><i class="fa fa-search"></i> Search</button></div>
+					</div>
+				</div>
+			</div>
+			
+		  </form>
 		  <div class="full price_table padding_infor_info">
 
 				<table id="#table_id#" class="table table-bordered small-font table-striped table-hover" cellspacing="0" width="100%">
@@ -73,8 +120,14 @@
 		"searching": true,
 		"ordering": false,
 		"ajax": $.fn.dataTable.pipeline({
-			url: "module/management/attendance/attendance_record_data.cfm"
-			//pages: 5, // number of pages to cache
+			url: "module/management/attendance/attendance_record_data.cfm",
+			method: 'POST',
+				"data": function(d) {
+				var dataFrom = $('###form_id#').serializeArray();
+				$.each(dataFrom, function(key, val) {
+					d[val.name] = val.value;
+				});
+				},
 		}),
 		"aoColumnDefs": 
 		[
@@ -132,6 +185,10 @@
       #table_id#.clearPipeline();
 		#table_id#.ajax.reload(null, false);
     }
+
+	$('##search_filter_attendance').on('click',function(){
+		reload_#table_id#();
+	});
 
 	function open_modal(process,data) 
 		{
