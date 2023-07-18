@@ -11,7 +11,7 @@
 <cfparam name="form['order[0][dir]']" default='asc' type="string">
 <cfset start= Int(Val(FORM.start))>
 <cfset length= Int(Val(FORM.length))>
-<cfset search= Trim(url['search[value]'])>
+<cfset search= Trim(FORM['search[value]'])>
 
 <cfif structKeyExists(FORM,'order[0][column]')>
 	<cfset iSortCol_0= Int(Val(FORM['order[0][column]']))>
@@ -56,6 +56,13 @@
 	SELECT t1.*, `t2`.`fullname`,`t2`.`ic_no`
 	FROM `attendance` t1 
 	INNER JOIN `users` t2 ON t2.`id` = t1.`user_id`
+	WHERE 0=0
+	<cfif isDefined('form.yr') AND form.yr NEQ ''>
+		AND YEAR(t1.created_date) = '#form.yr#'
+	</cfif>
+	<cfif isDefined('form.mnth') AND form.mnth NEQ ''>
+		AND MONTH(t1.created_date) = '#form.mnth#'
+	</cfif>
 	#PreserveSingleQuotes(queryWhere)# #queryOrder#
 </cfquery>
 
@@ -63,7 +70,14 @@
 	SELECT COUNT(t1.id) AS total 
 	FROM `attendance` t1
 	INNER JOIN `users` t2 ON t2.`id` = t1.`user_id`
+	WHERE 0=0
+	<cfif isDefined('form.yr') AND form.yr NEQ ''>
+		AND YEAR(t1.created_date) = '#form.yr#'
+	</cfif>
+	<cfif isDefined('form.mnth') AND form.mnth NEQ ''>
+		AND MONTH(t1.created_date) = '#form.mnth#'
+	</cfif>
 	#PreserveSingleQuotes(queryWhere)# #queryOrder#
 </cfquery>
 <cfsavecontent variable="datatablesjson"><cfloop from="1" to="#queryResult.RecordCount#" index="counter"><cfoutput>[<cfloop from="1"  to="#noOfTableFields#" index="innerCounter"><cfif tableFields[innerCounter] EQ "start_date">"#JSStringFormat(dateformat(queryResult[tableFields[innerCounter]][counter],'yyyy/mm/dd'))#"<cfelse>"#replacenocase(JSStringFormat(queryResult[rereplace(tableFields[innerCounter],'"','','all')][counter]),"\'","'","all")#"</cfif><cfif innerCounter LT noOfTableFields>,</cfif></cfloop>]<cfif counter LT queryResult.RecordCount>,</cfif></cfoutput></cfloop></cfsavecontent>
-	<cfoutput>{"draw":#Int(Val(URL.draw))#,"recordsTotal":<cfif querycount.total GT 0>#querycount.total#<cfelse>0</cfif>,"recordsFiltered":<cfif querycount.total GT 0>#querycount.total#<cfelse>0</cfif>,"data":[#datatablesjson#]}</cfoutput>
+	<cfoutput>{"draw":#Int(Val(form.draw))#,"recordsTotal":<cfif querycount.total GT 0>#querycount.total#<cfelse>0</cfif>,"recordsFiltered":<cfif querycount.total GT 0>#querycount.total#<cfelse>0</cfif>,"data":[#datatablesjson#]}</cfoutput>
