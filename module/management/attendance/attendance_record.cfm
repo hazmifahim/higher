@@ -190,6 +190,7 @@
 		reload_#table_id#();
 	});
 
+
 	function open_modal(process,data) 
 		{
 			if(process == 'info')

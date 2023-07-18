@@ -37,6 +37,21 @@
                 
                     <!--- gross salary --->
                     <cfset gross_salary = get_user.salary_rate>
+
+                    <cfquery name="get_socso" datasource="higher">
+                        SELECT employee_contribution, employer_contribution FROM socso_rate
+                        WHERE #gross_salary# >= min_salary AND #gross_salary# < max_salary;
+                    </cfquery>
+        
+                    <cfquery name="get_eis" datasource="higher">
+                        SELECT employee_contribution, employer_contribution FROM eis_rate
+                        WHERE #gross_salary# >= min_salary AND #gross_salary# < max_salary;
+                    </cfquery>
+        
+                    <cfset employee_socso = get_socso.employee_contribution>
+                    <cfset employer_socso = get_socso.employer_contribution>
+                    <cfset employee_eis = get_eis.employee_contribution>
+                    <cfset employer_eis = get_eis.employer_contribution>
                 
                     <cfset employee_epf = gross_salary*0.11>
                     <cfset employer_epf = gross_salary*0.13>
@@ -53,6 +68,11 @@
     
                     <cfset employee_epf = 0.0>
                     <cfset employer_epf = 0.0>
+                    
+                    <cfset employee_socso = 0.0>
+                    <cfset employer_socso = 0.0>
+                    <cfset employee_eis = 0.0>
+                    <cfset employer_eis = 0.0>
 
                 <!--- per trip 3.pilot 4.driver--->
                 <cfelse>
@@ -60,7 +80,7 @@
                    <cfif get_user.role_ids EQ 3>
                         <cfquery name="get_pilot_task" datasource="higher">
                             SELECT
-                                SUM(trip_qty) AS total_trip
+                                SUM(flight_qty) AS total_trip
                             FROM
                                 `pilot_task`
                             WHERE pilot_id = #get_user.id#
@@ -68,7 +88,14 @@
                             AND YEAR(task_dt) = #form.year#
                         </cfquery>
 
-                        <cfset gross_salary = get_pilot_task.total_trip*get_user.salary_rate>
+
+                        <cfif get_pilot_task.total_trip NEQ "">
+                            <cfset gross_salary = LSParseNumber(get_pilot_task.total_trip)*get_user.salary_rate>
+                            
+                        <cfelse>
+                            <cfset gross_salary = 0.00>
+                        </cfif>
+                        
                    <cfelse>
 
 
@@ -82,11 +109,21 @@
                             AND YEAR(log_dt) = #form.year#
                         </cfquery>
 
-                        <cfset gross_salary = get_driver_task.total_trip*get_user.salary_rate>
+                        <cfif get_driver_task.total_trip NEQ "">
+                            <cfset gross_salary = LSParseNumber(get_driver_task.total_trip)*get_user.salary_rate>
+                            
+                        <cfelse>
+                            <cfset gross_salary = 0.00>
+                        </cfif>
+                        
                    </cfif>
     
                     
-    
+                   <cfset employee_socso = 0.0>
+                   <cfset employer_socso = 0.0>
+                   <cfset employee_eis = 0.0>
+                   <cfset employer_eis = 0.0>
+                   
                     <cfset employee_epf = 0.0>
                     <cfset employer_epf = 0.0>
     
@@ -100,20 +137,7 @@
                     AND `year` = #form.year#
                 </cfquery>
     
-                <cfquery name="get_socso" datasource="higher">
-                    SELECT employee_contribution, employer_contribution FROM socso_rate
-                    WHERE #gross_salary# >= min_salary AND #gross_salary# < max_salary;
-                </cfquery>
-    
-                <cfquery name="get_eis" datasource="higher">
-                    SELECT employee_contribution, employer_contribution FROM eis_rate
-                    WHERE #gross_salary# >= min_salary AND #gross_salary# < max_salary;
-                </cfquery>
-    
-                <cfset employee_socso = get_socso.employee_contribution>
-                <cfset employer_socso = get_socso.employer_contribution>
-                <cfset employee_eis = get_eis.employee_contribution>
-                <cfset employer_eis = get_eis.employer_contribution>
+                
     
                 <cfset net_amount = gross_salary-employee_epf-employee_socso-employee_eis-get_advance.total_advance>
     

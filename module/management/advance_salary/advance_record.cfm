@@ -51,7 +51,7 @@
 					<!--- <a id="btn-reg-verification" onclick="open_modal()" class="btn btn-sm btn-primary" data-type="modal" title="Register Advance" data-title="Register Advance"><i class="fa fa-plus"></i> Register Advance</a> --->
 				</div>
 			</div>
-			<form id="#form_id#" name="#form_id#">
+			<!--- <form id="#form_id#" name="#form_id#">
 				<div class="col-sm-12">
 					<div class="row" style="padding:20px">
 						<div class="col-sm-5">
@@ -94,7 +94,7 @@
 						</div>
 					</div>
 				</div>
-			</form>
+			</form> --->
 		  <div class="full price_table padding_infor_info">
 				<table id="#table_id#" class="table table-bordered small-font table-striped table-hover" cellspacing="0" width="100%">
 					<thead>
