@@ -36,19 +36,65 @@
 </cfquery>
 
 <cfset table_id = 'advance_record_list'>
+<cfset form_id = 'advance_record_filter'>
 
 <div class="row mt-5">
 	<div class="col-sm-12">
 
 		<div class="white_shd full margin_bottom_30">
-			<div class="full graph_head">
+			<div class="full graph_head mb-5">
 			   <div class="heading1 margin_0">
 				  <h2>Advance Record</b></h2>
 			   </div>
 			   <div class="pull-right box-tools">
-					<a id="btn-reg-verification" onclick="open_modal()" class="btn btn-sm btn-primary" data-type="modal" title="Register Advance" data-title="Register Advance"><i class="fa fa-plus"></i> Register Advance</a>
+					<div class="button_block mt-2"><button type="button" onclick="open_modal()"  class="btn cur-p btn-primary"><i class="fa fa-plus"></i> Register Advance</button></div>
+					<!--- <a id="btn-reg-verification" onclick="open_modal()" class="btn btn-sm btn-primary" data-type="modal" title="Register Advance" data-title="Register Advance"><i class="fa fa-plus"></i> Register Advance</a> --->
 				</div>
 			</div>
+			<form id="#form_id#" name="#form_id#">
+				<div class="col-sm-12">
+					<div class="row" style="padding:20px">
+						<div class="col-sm-5">
+							<cfparam name="yr" default="#YEAR(now())#">
+							<cfparam name="min_yr" default="#yr-5#">
+							<div class="row">
+							<label class="col-sm-4 col-form-label">Year </label>
+							<div class="col-sm-8">
+								<select name="yr" id="yr" class="form-control">
+									<cfloop from="#yr#" to="#min_yr#" index="i" step="-1">
+										<option value="#i#">#i#</option>
+									</cfloop>
+								</select>
+							</div>
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<div class="row">
+							<label class="col-sm-4 col-form-label">Month </label>
+							<div class="col-sm-8">
+								<select class="form-control" id="mnth" name="mnth">
+									<option value="1">January</option>
+									<option value="2">February</option>
+									<option value="3">March</option>
+									<option value="4">April</option>
+									<option value="5">May</option>
+									<option value="6">June</option>
+									<option value="7">July</option>
+									<option value="8">August</option>
+									<option value="9">September</option>
+									<option value="10">October</option>
+									<option value="11">November</option>
+									<option value="12">December</option>
+								</select>
+							</div>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="button_block"><button type="button" id="search_filter_advance" class="btn cur-p btn-info float-right"><i class="fa fa-search"></i> Search</button></div>
+						</div>
+					</div>
+				</div>
+			</form>
 		  <div class="full price_table padding_infor_info">
 				<table id="#table_id#" class="table table-bordered small-font table-striped table-hover" cellspacing="0" width="100%">
 					<thead>
@@ -95,8 +141,13 @@
 		"ordering": false,
 		"ajax": $.fn.dataTable.pipeline({
 			url: "module/management/advance_salary/advance_record_data.cfm",
-			type: "POST",
-			dataType: "script"
+			method: 'POST',
+				"data": function(d) {
+				var dataFrom = $('###form_id#').serializeArray();
+				$.each(dataFrom, function(key, val) {
+					d[val.name] = val.value;
+				});
+				},
 		}),
 		"aoColumnDefs": 
 		[
@@ -167,6 +218,10 @@
       #table_id#.clearPipeline();
 		#table_id#.ajax.reload(null, false);
     }
+
+	$('##search_filter_advance').on('click',function(){
+		reload_#table_id#();
+	});
 
 	function open_modal() 
 	{

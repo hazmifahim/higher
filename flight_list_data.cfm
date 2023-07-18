@@ -65,7 +65,10 @@
 	FROM `flight` a
 	LEFT JOIN `lt_location` b ON (a.location_id = b.id)
 	LEFT JOIN `lt_status_id` c ON (a.lt_status_id = c.id)
-	WHERE DATE_FORMAT(a.flight_dt, "%M %d %Y") = DATE_FORMAT(NOW(), "%M %d %Y")
+	WHERE true
+	<cfif isDefined('url.date_filter') AND url.date_filter NEQ ''>
+		AND DATE_FORMAT(a.flight_dt, "%d/%m/%Y") = '#url.date_filter#'
+	</cfif>
 
 	#PreserveSingleQuotes(queryWhere)# 
 </cfquery>
@@ -75,8 +78,12 @@
 	FROM `flight` a
 	LEFT JOIN `lt_location` b ON (a.location_id = b.id)
 	LEFT JOIN `lt_status_id` c ON (a.lt_status_id = c.id)
+	WHERE true
+	<cfif isDefined('url.date_filter') AND url.date_filter NEQ ''>
+		AND DATE_FORMAT(a.flight_dt, "%d/%m/%Y") = '#url.date_filter#'
+	</cfif>
 
 	#PreserveSingleQuotes(queryWhere)#
 </cfquery>
 <cfsavecontent variable="datatablesjson"><cfloop from="1" to="#queryResult.RecordCount#" index="counter"><cfoutput>[<cfloop from="1"  to="#noOfTableFields#" index="innerCounter"><cfif tableFields[innerCounter] EQ "start_date">"#JSStringFormat(dateformat(queryResult[tableFields[innerCounter]][counter],'yyyy/mm/dd'))#"<cfelse>"#replacenocase(JSStringFormat(queryResult[rereplace(tableFields[innerCounter],'"','','all')][counter]),"\'","'","all")#"</cfif><cfif innerCounter LT noOfTableFields>,</cfif></cfloop>]<cfif counter LT queryResult.RecordCount>,</cfif></cfoutput></cfloop></cfsavecontent>
-	<cfoutput>{"draw":#Int(Val(URL.draw))#,"recordsTotal":<cfif querycount.total GT 0>#querycount.total#<cfelse>0</cfif>,"recordsFiltered":<cfif querycount.total GT 0>#querycount.total#<cfelse>0</cfif>,"data":[#datatablesjson#]}</cfoutput>
+	<cfoutput>{"draw":#Int(Val(url.draw))#,"recordsTotal":<cfif querycount.total GT 0>#querycount.total#<cfelse>0</cfif>,"recordsFiltered":<cfif querycount.total GT 0>#querycount.total#<cfelse>0</cfif>,"data":[#datatablesjson#]}</cfoutput>

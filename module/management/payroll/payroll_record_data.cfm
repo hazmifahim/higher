@@ -11,7 +11,7 @@
 <cfparam name="form['order[0][dir]']" default='asc' type="string">
 <cfset start= Int(Val(FORM.start))>
 <cfset length= Int(Val(FORM.length))>
-<cfset search= Trim(URL['search[value]'])>
+<cfset search= Trim(form['search[value]'])>
 
 <cfif structKeyExists(FORM,'order[0][column]')>
 	<cfset iSortCol_0= Int(Val(FORM['order[0][column]']))>
@@ -55,6 +55,13 @@
 <cfquery name="queryResult" datasource="#datasource#">
 	SELECT t1.*, t2.`fullname` FROM `payslips` t1 
 	INNER JOIN `users` t2 ON t2.`id` = t1.`user_id`
+	WHERE true
+	<cfif isDefined('form.yr') AND form.yr NEQ ''>
+		AND t1.year = '#form.yr#'
+	</cfif>
+	<cfif isDefined('form.mnth') AND form.mnth NEQ ''>
+		AND t1.month = '#form.mnth#'
+	</cfif>
 	#PreserveSingleQuotes(queryWhere)# 
 	ORDER BY t1.`created_date` DESC
 
@@ -65,7 +72,14 @@
 	SELECT COUNT(t1.id) AS total 
 	FROM `payslips` t1
 	INNER JOIN `users` t2 ON t2.`id` = t1.`user_id`
+	WHERE true
+	<cfif isDefined('form.yr') AND form.yr NEQ ''>
+		AND t1.year = '#form.yr#'
+	</cfif>
+	<cfif isDefined('form.mnth') AND form.mnth NEQ ''>
+		AND t1.month = '#form.mnth#'
+	</cfif>
 	#PreserveSingleQuotes(queryWhere)#
 </cfquery>
 <cfsavecontent variable="datatablesjson"><cfloop from="1" to="#queryResult.RecordCount#" index="counter"><cfoutput>[<cfloop from="1"  to="#noOfTableFields#" index="innerCounter"><cfif tableFields[innerCounter] EQ "start_date">"#JSStringFormat(dateformat(queryResult[tableFields[innerCounter]][counter],'yyyy/mm/dd'))#"<cfelse>"#replacenocase(JSStringFormat(queryResult[rereplace(tableFields[innerCounter],'"','','all')][counter]),"\'","'","all")#"</cfif><cfif innerCounter LT noOfTableFields>,</cfif></cfloop>]<cfif counter LT queryResult.RecordCount>,</cfif></cfoutput></cfloop></cfsavecontent>
-	<cfoutput>{"draw":#Int(Val(URL.draw))#,"recordsTotal":<cfif querycount.total GT 0>#querycount.total#<cfelse>0</cfif>,"recordsFiltered":<cfif querycount.total GT 0>#querycount.total#<cfelse>0</cfif>,"data":[#datatablesjson#]}</cfoutput>
+	<cfoutput>{"draw":#Int(Val(form.draw))#,"recordsTotal":<cfif querycount.total GT 0>#querycount.total#<cfelse>0</cfif>,"recordsFiltered":<cfif querycount.total GT 0>#querycount.total#<cfelse>0</cfif>,"data":[#datatablesjson#]}</cfoutput>

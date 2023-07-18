@@ -99,7 +99,6 @@
                         <a href="##flight" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-send green_color"></i> <span>Flights</span></a>
                         <ul class="collapse list-unstyled" id="flight">
                            <li><a id="flight_form" href="##">> <span>Register New Flight</span></a></li>
-                           <li><a id="today_list" href="##">> <span>Today's Flight</span></a></li>
                            <li><a id="flight_list" href="##">> <span>All Flight</span></a></li>
                         </ul>
                      </li>
@@ -244,6 +243,10 @@
 
       $("##flight_form").click(function(){
          loadContent("flight_form.cfm");
+      });
+
+      $("##flight_list").click(function(){
+         loadContent("flight_list.cfm");
       });
 
       $("##pilot_task").click(function(){
