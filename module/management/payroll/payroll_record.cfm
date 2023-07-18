@@ -43,14 +43,60 @@
 
 		<div class="white_shd full margin_bottom_30">
 			<div class="full graph_head mb-5">
-			   <div class="heading1 margin_0">
-				  <h2>Payroll Record</b></h2>
-			   </div>
-			   <div class="pull-right box-tools">
+				<div class="heading1 margin_0">
+					<h2>Payroll Record</b></h2>
+				</div>
+				<div class="pull-right box-tools">
 				<div class="button_block mt-2"><button type="button" onclick="open_modal()"  class="btn cur-p btn-primary"><i class="fa fa-plus"></i> Generate Payroll</button></div>
 					<!--- <a id="btn-reg-verification" onclick="open_modal()" class="btn btn-sm btn-primary" data-type="modal" title="Generate Payroll" data-title="Generate Payroll"><i class="fa fa-plus"></i> Generate Payroll</a> --->
 				</div>
 			</div>
+			<form id="#form_id#" name="#form_id#">
+				<div class="row" style="padding:35px">
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-sm-5">
+								<cfparam name="yr" default="#YEAR(now())#">
+								<cfparam name="min_yr" default="#yr-5#">
+								<div class="row">
+								<label class="col-sm-4 col-form-label">Year </label>
+								<div class="col-sm-8">
+									<select name="yr" id="yr" class="form-control">
+										<cfloop from="#yr#" to="#min_yr#" index="i" step="-1">
+											<option value="#i#">#i#</option>
+										</cfloop>
+									</select>
+								</div>
+								</div>
+							</div>
+							<div class="col-sm-5">
+								<div class="row">
+								<label class="col-sm-4 col-form-label">Month </label>
+								<div class="col-sm-8">
+									<select class="form-control" id="mnth" name="mnth">
+										<option value="1">January</option>
+										<option value="2">February</option>
+										<option value="3">March</option>
+										<option value="4">April</option>
+										<option value="5">May</option>
+										<option value="6">June</option>
+										<option value="7">July</option>
+										<option value="8">August</option>
+										<option value="9">September</option>
+										<option value="10">October</option>
+										<option value="11">November</option>
+										<option value="12">December</option>
+									</select>
+								</div>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="button_block"><button type="button" id="search_filter_payroll" class="btn cur-p btn-info float-right"><i class="fa fa-search"></i> Search</button></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
 			
 		  <div class="full price_table padding_infor_info">
 				<table id="#table_id#" class="table table-bordered small-font table-striped table-hover" cellspacing="0" width="100%">
@@ -184,7 +230,7 @@
 		reload_#table_id#();
 	});
 
-	function open_modal() 
+	function open_modal_payroll() 
 	{
 		var title = 'Generate Payroll';
 		var target = 'module/management/payroll/payroll_form.cfm?';
