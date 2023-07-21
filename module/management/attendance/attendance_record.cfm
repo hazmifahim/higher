@@ -190,10 +190,9 @@
 		reload_#table_id#();
 	});
 
-
-	function open_modal(process,data) 
-		{
-			if(process == 'info')
+	open_modal = function(process,data)
+      {
+        if(process == 'info')
 			{
 				let param = $.param({
 					id: data
@@ -203,11 +202,10 @@
 				var target = 'attendance_form.cfm?'+param;
 			}
 
-			BootstrapDialog.show({
+         BootstrapDialog.show({
 				size: BootstrapDialog.SIZE_WIDE,
 				type: 	BootstrapDialog.TYPE_PRIMARY,
 				title: title,
-				message: $('<div></div>').load(target),
 				closable: true,
 				closeByBackdrop: true,
 				closeByKeyboard: false,
@@ -216,26 +214,63 @@
 						action: function(dialogItself){
 							dialogItself.close();
 						}
-					},
-					{
-						label: 'Submit',
-						cssClass: 'btn-primary',
-						action: function(dialogItself){
-							var clock_in = $("##clock_in").val();
-							var clock_out = $("##clock_out").val();
-
-							$.post("attendance_act.cfm", //Required URL of the page on server
-							{ // Data Sending With Request To Server
-								clock_in:clock_in,
-								clock_out:clock_out,
-								userid:data
-							},
-							function(){ // Required Callback Function
-							}, "script");
-						}
-					}]
+					}],
+               onshown: function(dialogRef){
+                  $('##'+dialogRef.options.id+' .bootstrap-dialog-message').load(target)
+               }
 				});
-		}
+      }
+
+	  $("##type_work").change(function() {
+          console.log('hi');
+        });
+
+
+	// function open_modal(process,data) 
+	// 	{
+	// 		if(process == 'info')
+	// 		{
+	// 			let param = $.param({
+	// 				id: data
+	// 			});
+
+	// 			var title = 'Attendance Info';
+	// 			var target = 'attendance_form.cfm?'+param;
+	// 		}
+
+	// 		BootstrapDialog.show({
+	// 			size: BootstrapDialog.SIZE_WIDE,
+	// 			type: 	BootstrapDialog.TYPE_PRIMARY,
+	// 			title: title,
+	// 			message: $('<div></div>').load(target),
+	// 			closable: true,
+	// 			closeByBackdrop: true,
+	// 			closeByKeyboard: false,
+	// 			buttons: [{
+	// 					label: 'Close',
+	// 					action: function(dialogItself){
+	// 						dialogItself.close();
+	// 					}
+	// 				},
+	// 				{
+	// 					label: 'Submit',
+	// 					cssClass: 'btn-primary',
+	// 					action: function(dialogItself){
+	// 						var clock_in = $("##clock_in").val();
+	// 						var clock_out = $("##clock_out").val();
+
+	// 						$.post("attendance_act.cfm", //Required URL of the page on server
+	// 						{ // Data Sending With Request To Server
+	// 							clock_in:clock_in,
+	// 							clock_out:clock_out,
+	// 							userid:data
+	// 						},
+	// 						function(){ // Required Callback Function
+	// 						}, "script");
+	// 					}
+	// 				}]
+	// 			});
+	// }
 
 </script>
 

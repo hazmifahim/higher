@@ -114,51 +114,82 @@
 		#table_id#.ajax.reload(null, false);
     }
 
-	function open_modal(process,data) 
+	// function open_modal(process,data) 
+	// {
+	// 	if(process == 'info')
+	// 	{
+	// 		let param = $.param({
+	// 			id: data
+	// 		});
+
+	// 		var title = 'Attendance Form';
+	// 		var target = 'module/management/attendance/attendance_form.cfm?'+param;
+	// 	}
+
+	// 	BootstrapDialog.show({
+	// 		size: BootstrapDialog.SIZE_WIDE,
+	// 		type: 	BootstrapDialog.TYPE_PRIMARY,
+	// 		title: title,
+	// 		message: $('<div></div>').load(target),
+	// 		closable: true,
+	// 		closeByBackdrop: true,
+	// 		closeByKeyboard: false,
+	// 		buttons: [{
+	// 				label: 'Close',
+	// 				action: function(dialogItself){
+	// 					dialogItself.close();
+	// 				}
+	// 			},
+	// 			{
+	// 				label: 'Submit',
+	// 				cssClass: 'btn-primary',
+	// 				action: function(dialogItself){
+	// 					var clock_in = $("##clock_in").val();
+	// 					var clock_out = $("##clock_out").val();
+
+	// 					$.post("module/management/attendance/attendance_act.cfm", //Required URL of the page on server
+	// 					{ // Data Sending With Request To Server
+	// 						clock_in:clock_in,
+	// 						clock_out:clock_out,
+	// 						userid:data
+	// 					},
+	// 					function(){ // Required Callback Function
+	// 					}, "script");
+	// 				}
+	// 			}]
+	// 		});
+	// }
+
+	open_modal = function(process,data)
+    {
+        if(process == 'info')
 		{
-			if(process == 'info')
-			{
-				let param = $.param({
-					id: data
-				});
+			let param = $.param({
+				id: data
+			});
 
-				var title = 'Attendance Form';
-				var target = 'module/management/attendance/attendance_form.cfm?'+param;
-			}
-
-			BootstrapDialog.show({
-				size: BootstrapDialog.SIZE_WIDE,
-				type: 	BootstrapDialog.TYPE_PRIMARY,
-				title: title,
-				message: $('<div></div>').load(target),
-				closable: true,
-				closeByBackdrop: true,
-				closeByKeyboard: false,
-				buttons: [{
-						label: 'Close',
-						action: function(dialogItself){
-							dialogItself.close();
-						}
-					},
-					{
-						label: 'Submit',
-						cssClass: 'btn-primary',
-						action: function(dialogItself){
-							var clock_in = $("##clock_in").val();
-							var clock_out = $("##clock_out").val();
-
-							$.post("module/management/attendance/attendance_act.cfm", //Required URL of the page on server
-							{ // Data Sending With Request To Server
-								clock_in:clock_in,
-								clock_out:clock_out,
-								userid:data
-							},
-							function(){ // Required Callback Function
-							}, "script");
-						}
-					}]
-				});
+			var title = 'Attendance Form';
+			var target = 'module/management/attendance/attendance_form.cfm?'+param;
 		}
+
+         BootstrapDialog.show({
+			size: BootstrapDialog.SIZE_WIDE,
+			type: 	BootstrapDialog.TYPE_PRIMARY,
+			title: title,
+			closable: true,
+			closeByBackdrop: true,
+			closeByKeyboard: false,
+			buttons: [{
+					label: 'Close',
+					action: function(dialogItself){
+						dialogItself.close();
+					}
+				}],
+			onshown: function(dialogRef){
+				$('##'+dialogRef.options.id+' .bootstrap-dialog-message').load(target)
+			}
+		});
+    }
 
 </script>
 
