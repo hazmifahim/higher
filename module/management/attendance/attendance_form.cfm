@@ -1,6 +1,8 @@
 <cfoutput>
 
-    <form name="attendance_form" id="attendance_form">
+  <cfset form_id = 'form_attnd'>
+
+    <form name="#form_id#" id="#form_id#">
       <div class="row mb-2">
         <div class="col-6">
           <label for="type_work">Type</label>
@@ -59,7 +61,7 @@
               $.ajax({
                 url: 'module/management/attendance/attendance_act.cfm',
                 type: "POST",
-                data : $('##attendance_form').serialize(),
+                data : $('###form_id#').serialize(),
                 dataType: "script"
               });
             } else {
