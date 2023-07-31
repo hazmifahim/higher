@@ -112,8 +112,25 @@
                      <li>
                         <a href="##driver_sec" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-car purple_color"></i> <span>Driver Section</span></a>
                         <ul class="collapse list-unstyled" id="driver_sec">
-                           <li><a id="" href="##">> <span>Driver's Profile</span></a></li>
+                           <li><a id="driver_list" href="##">> <span>Driver's Profile</span></a></li>
                            <li><a id="driver_log" href="##">> <span>Driver's Log</span></a></li>
+                        </ul>
+                     </li>
+                     <li>
+                        <a href="##report_sec" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-file-pdf-o green_color"></i> <span>Report</span></a>
+                        <ul class="collapse list-unstyled" id="report_sec">
+                           <li><a id="" href="##">> <span>Daily Flight Report</span></a></li>
+                           <li><a id="" href="##">> <span>Daily Pilot Task Report</span></a></li>
+                           <li><a id="" href="##">> <span>Daily Driver Log Report</span></a></li>
+                           <li><a id="" href="##">> <span>Monthly Flight Report</span></a></li>
+                           <li><a id="" href="##">> <span>Monthly Pilot Task Report</span></a></li>
+                           <li><a id="" href="##">> <span>Monthly Driver Log Report</span></a></li>
+                           <li><a id="" href="##">> <span>Yearly Flight Report</span></a></li>
+                           <li><a id="" href="##">> <span>Yearly Pilot Task Report</span></a></li>
+                           <li><a id="" href="##">> <span>Yearly Driver Log Report</span></a></li>
+                           <li><a id="" href="##">> <span>Daily Gross Report</span></a></li>
+                           <li><a id="" href="##">> <span>Monthly Gross Report</span></a></li>
+                           <li><a id="" href="##">> <span>Yearly Gross Report</span></a></li>
                         </ul>
                      </li>
                   </ul>
@@ -249,8 +266,16 @@
          loadContent("flight_list.cfm");
       });
 
+      $("##pilot_list").click(function(){
+         loadContent("module/pilot/pilot_list.cfm");
+      });
+
       $("##pilot_task").click(function(){
          loadContent("module/pilot/pilot_task_list.cfm");
+      });
+
+      $("##driver_list").click(function(){
+         loadContent("module/driver/driver_list.cfm");
       });
 
       $("##driver_log").click(function(){
